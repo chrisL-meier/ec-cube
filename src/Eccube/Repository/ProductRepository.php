@@ -15,6 +15,7 @@ namespace Eccube\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Eccube\Common\EccubeConfig;
 use Eccube\Doctrine\Query\Queries;
 use Eccube\Entity\Category;
@@ -24,6 +25,7 @@ use Eccube\Entity\Master\ProductStatus;
 use Eccube\Entity\Product;
 use Eccube\Entity\ProductStock;
 use Eccube\Entity\Tag;
+use Eccube\Entity\TaxRule;
 use Eccube\Util\StringUtil;
 
 /**
@@ -43,6 +45,10 @@ class ProductRepository extends AbstractRepository
      * @var EccubeConfig
      */
     protected $eccubeConfig;
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
     public const COLUMNS = [
         'product_id' => 'p.id', 'name' => 'p.name', 'product_code' => 'pc.code', 'stock' => 'pc.stock', 'status' => 'p.Status', 'create_date' => 'p.create_date', 'update_date' => 'p.update_date',
@@ -54,15 +60,18 @@ class ProductRepository extends AbstractRepository
      * @param RegistryInterface $registry
      * @param Queries $queries
      * @param EccubeConfig $eccubeConfig
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(
         RegistryInterface $registry,
         Queries $queries,
-        EccubeConfig $eccubeConfig
+        EccubeConfig $eccubeConfig,
+        EntityManagerInterface $entityManager
     ) {
         parent::__construct($registry, Product::class);
         $this->queries = $queries;
         $this->eccubeConfig = $eccubeConfig;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -147,6 +156,7 @@ class ProductRepository extends AbstractRepository
      */
     public function getQueryBuilderBySearchData($searchData)
     {
+        $standard_tax_rate = $this->entityManager->getRepository(TaxRule::class)->findBy(['ProductClass' => null],['apply_date' => 'DESC'])[0]->getTaxRate();
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.Status = 1');
 
@@ -184,7 +194,8 @@ class ProductRepository extends AbstractRepository
         $config = $this->eccubeConfig;
         if (!empty($searchData['orderby']) && $searchData['orderby']->getId() == $config['eccube_product_order_price_lower']) {
             // @see http://doctrine-orm.readthedocs.org/en/latest/reference/dql-doctrine-query-language.html
-            $qb->addSelect('MIN(pc.price02 * (1 + (tr.tax_rate/100))) as HIDDEN price02_min');
+            $qb->addSelect('ROUND(MIN(pc.price02 * (1 + (case when tr.tax_rate is null then :standard else tr.tax_rate end)/100))) as HIDDEN price02_min');
+            $qb->setParameter(":standard",$standard_tax_rate);
             $qb->innerJoin('p.ProductClasses', 'pc');
             $qb->leftJoin('pc.TaxRule', 'tr');
             $qb->andWhere('pc.visible = true');
@@ -193,7 +204,8 @@ class ProductRepository extends AbstractRepository
             $qb->addOrderBy('p.id', 'DESC');
         // 価格高い順
         } elseif (!empty($searchData['orderby']) && $searchData['orderby']->getId() == $config['eccube_product_order_price_higher']) {
-            $qb->addSelect('MAX(pc.price02 * (1 + (tr.tax_rate/100))) as HIDDEN price02_max');
+            $qb->addSelect('ROUND(MAX(pc.price02 * (1 + (case when tr.tax_rate is null then :standard else tr.tax_rate end)/100))) as HIDDEN price02_max');
+            $qb->setParameter(":standard",$standard_tax_rate);
             $qb->innerJoin('p.ProductClasses', 'pc');
             $qb->leftJoin('pc.TaxRule', 'tr');
             $qb->andWhere('pc.visible = true');

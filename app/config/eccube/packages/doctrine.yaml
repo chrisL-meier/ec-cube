@@ -34,6 +34,7 @@ doctrine:
                 NORMALIZE: Eccube\Doctrine\ORM\Query\Normalize
             numeric_functions:
                 EXTRACT: Eccube\Doctrine\ORM\Query\Extract
+                ROUND: Eccube\Doctrine\ORM\Query\Round
         filters:
             option_nostock_hidden:
                 class: Eccube\Doctrine\Filter\NoStockHiddenFilter
