@@ -67,11 +67,12 @@ class PointProcessor implements DiscountProcessor, PurchaseProcessor
 
     /**
      * {@inheritdoc}
+     *
      */
     public function addDiscountItem(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {
         if (!$this->supports($itemHolder)) {
-            return;
+            return null;
         }
 
         $usePoint = $itemHolder->getUsePoint();
@@ -116,6 +117,8 @@ class PointProcessor implements DiscountProcessor, PurchaseProcessor
                 return $result;
             }
         }
+
+        return null;
     }
 
     /*
