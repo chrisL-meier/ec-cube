@@ -13,6 +13,7 @@
 
 namespace Eccube\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 if (!class_exists('\Eccube\Entity\Layout')) {
@@ -122,7 +123,7 @@ if (!class_exists('\Eccube\Entity\Layout')) {
         /**
          * @param integer $targetId
          *
-         * @return BlockPosition[]
+         * @return BlockPosition[]|Collection<int,mixed>
          */
         public function getBlockPositionsByTargetId($targetId)
         {

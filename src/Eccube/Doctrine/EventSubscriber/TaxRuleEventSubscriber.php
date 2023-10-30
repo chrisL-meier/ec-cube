@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TaxRuleEventSubscriber implements EventSubscriber
 {
     /**
-     * @var TaxRuleService
+     * @var TaxRuleService|ContainerInterface
      */
     protected $container;
 

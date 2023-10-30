@@ -54,7 +54,7 @@ class AbstractController extends Controller
     protected $eventDispatcher;
 
     /**
-     * @var SessionInterface
+     * @var Session
      */
     protected $session;
 
@@ -86,10 +86,10 @@ class AbstractController extends Controller
     }
 
     /**
-     * @param SessionInterface $session
+     * @param Session $session
      * @required
      */
-    public function setSession(SessionInterface $session)
+    public function setSession(Session $session)
     {
         $this->session = $session;
     }

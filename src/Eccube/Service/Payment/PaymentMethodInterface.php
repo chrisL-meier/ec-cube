@@ -28,7 +28,7 @@ interface PaymentMethodInterface
      *
      * 主にクレジットカードの有効性チェック等を実装します.
      *
-     * @return PaymentResult
+     * @return PaymentResult|false
      */
     public function verify();
 
@@ -46,7 +46,7 @@ interface PaymentMethodInterface
      *
      * PaymentDispatcher に遷移先の情報を設定することで, 他のコントローラに処理を移譲できます.
      *
-     * @return PaymentDispatcher
+     * @return PaymentDispatcher|false
      */
     public function apply();
 
@@ -55,7 +55,7 @@ interface PaymentMethodInterface
      *
      * @param FormInterface $form
      *
-     * @return PaymentMethod
+     * @return $this
      */
     public function setFormType(FormInterface $form);
 
@@ -64,7 +64,7 @@ interface PaymentMethodInterface
      *
      * @param Order $Order
      *
-     * @return PaymentMethod
+     * @return $this
      */
     public function setOrder(Order $Order);
 }

@@ -150,7 +150,7 @@ class PaymentDispatcher
      *
      * @param Response $response
      *
-     * @return PaymentResult
+     * @return $this
      */
     public function setResponse(Response $response)
     {

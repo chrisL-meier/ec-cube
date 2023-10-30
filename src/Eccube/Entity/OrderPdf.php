@@ -111,7 +111,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
         private $visible = true;
 
         /**
-         * @return string
+         * @return int
          */
         public function getMemberId()
         {
@@ -315,7 +315,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
          *
          * @param boolean $visible
          *
-         * @return Delivery
+         * @return OrderPdf
          */
         public function setVisible($visible)
         {

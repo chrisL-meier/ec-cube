@@ -31,7 +31,7 @@ if (!class_exists('\Eccube\Entity\ProductTag')) {
          * Get tag_id
          * use csv export
          *
-         * @return integer
+         * @return integer|null
          */
         public function getTagId()
         {

@@ -91,7 +91,7 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         private $total_price;
 
         /**
-         * @var string
+         * @var float|int|string
          *
          * @ORM\Column(name="delivery_fee_total", type="decimal", precision=12, scale=2, options={"unsigned":true,"default":0})
          */
@@ -246,7 +246,7 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         }
 
         /**
-         * @param  CartItem[]          $CartItems
+         * @param  \Doctrine\Common\Collections\Collection<int,CartItem> $CartItems
          *
          * @return \Eccube\Entity\Cart
          */
@@ -272,7 +272,7 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         }
 
         /**
-         * @return float|string
+         * @return float|int|string
          */
         public function getTotalPrice()
         {

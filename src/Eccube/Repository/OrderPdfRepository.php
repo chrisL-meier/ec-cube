@@ -14,6 +14,7 @@
 namespace Eccube\Repository;
 
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use Eccube\Entity\AbstractEntity;
 use Eccube\Entity\Member;
 use Eccube\Entity\OrderPdf;
 
@@ -33,14 +34,14 @@ class OrderPdfRepository extends AbstractRepository
     /**
      * Save admin history.
      *
-     * @param array $arrData
+     * @param AbstractEntity|array<mixed> $arrData
      *
      * @return bool
      */
     public function save($arrData)
     {
         /**
-         * @var Member
+         * @var Member $Member
          */
         $Member = $arrData['admin'];
 

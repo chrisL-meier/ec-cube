@@ -517,7 +517,7 @@ if (!class_exists('\Eccube\Entity\OrderItem')) {
         }
 
         /**
-         * @return string
+         * @return float|int|string
          */
         public function getTax()
         {

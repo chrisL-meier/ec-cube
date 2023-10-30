@@ -34,12 +34,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class DoctrineOrmExtension extends AbstractTypeExtension
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $em;
 
     /**
-     * @var AnnotationReader
+     * @var Reader
      */
     protected $reader;
 

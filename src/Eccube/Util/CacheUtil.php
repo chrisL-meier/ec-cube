@@ -111,7 +111,7 @@ class CacheUtil implements EventSubscriberInterface
     /**
      * Doctrineのキャッシュを削除します.
      *
-     * @return string
+     * @return string|void
      *
      * @throws \Exception
      */

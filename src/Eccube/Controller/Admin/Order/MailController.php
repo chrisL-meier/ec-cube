@@ -100,7 +100,7 @@ class MailController extends AbstractController
             switch ($mode) {
                 case 'change':
                     if ($form->get('template')->isValid()) {
-                        /** @var \Eccube\Entity\MailTemplate $data */
+                        /** @var \Eccube\Entity\MailTemplate $MailTemplate */
                         $MailTemplate = $form->get('template')->getData();
 
                         if ($MailTemplate) {
