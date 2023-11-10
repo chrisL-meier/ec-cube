@@ -47,7 +47,7 @@ class CsvFixture implements FixtureInterface
     {
         // EntityManagerInterface 以外はスキップ
         if($manager instanceof EntityManagerInterface === false) {
-            return;
+            return null;
         }
 
         // 日本語windowsの場合はインストール時にエラーとなるので英語のロケールをセット

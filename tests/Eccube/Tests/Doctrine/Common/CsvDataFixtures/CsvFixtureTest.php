@@ -13,6 +13,7 @@
 
 namespace Eccube\Tests\Doctrine\Common\CsvDataFixtures;
 
+use Doctrine\Persistence\ObjectManager;
 use Eccube\Doctrine\Common\CsvDataFixtures\CsvFixture;
 use Eccube\Repository\Master\JobRepository;
 use Eccube\Tests\EccubeTestCase;
@@ -40,7 +41,6 @@ class CsvFixtureTest extends EccubeTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->jobRepository = $this->entityManager->getRepository(\Eccube\Entity\Master\Job::class);
 
         $Jobs = $this->jobRepository->findAll();
@@ -85,6 +85,7 @@ class CsvFixtureTest extends EccubeTestCase
         }
 
         $this->file->rewind();
+        $this->assertNull($this->fixture->load(new TestObjectManager()));
         $this->fixture->load($this->entityManager);
         $Jobs = $this->jobRepository->findAll();
 
@@ -96,5 +97,73 @@ class CsvFixtureTest extends EccubeTestCase
             $this->actual = $Job->getId().', '.$Job->getName().', '.$Job->getSortNo();
             $this->verify($key.'行目のデータは一致するか？');
         }
+    }
+}
+class TestObjectManager implements ObjectManager
+{
+
+    public function find($className, $id)
+    {
+        // TODO: Implement find() method.
+    }
+
+    public function persist($object)
+    {
+        // TODO: Implement persist() method.
+    }
+
+    public function remove($object)
+    {
+        // TODO: Implement remove() method.
+    }
+
+    public function merge($object)
+    {
+        // TODO: Implement merge() method.
+    }
+
+    public function clear($objectName = null)
+    {
+        // TODO: Implement clear() method.
+    }
+
+    public function detach($object)
+    {
+        // TODO: Implement detach() method.
+    }
+
+    public function refresh($object)
+    {
+        // TODO: Implement refresh() method.
+    }
+
+    public function flush()
+    {
+        // TODO: Implement flush() method.
+    }
+
+    public function getRepository($className)
+    {
+        // TODO: Implement getRepository() method.
+    }
+
+    public function getClassMetadata($className)
+    {
+        // TODO: Implement getClassMetadata() method.
+    }
+
+    public function getMetadataFactory()
+    {
+        // TODO: Implement getMetadataFactory() method.
+    }
+
+    public function initializeObject($obj)
+    {
+        // TODO: Implement initializeObject() method.
+    }
+
+    public function contains($object)
+    {
+        // TODO: Implement contains() method.
     }
 }
