@@ -64,6 +64,8 @@ if (!class_exists(OrderStatus::class, false)) {
 
         /**
          * @param bool $display_order_count
+         *
+         * @return void
          */
         public function setDisplayOrderCount($display_order_count = false)
         {

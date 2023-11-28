@@ -53,9 +53,10 @@ class EntityToIdTransformer implements DataTransformerInterface
         if ('' === $id || null === $id) {
             return null;
         }
-
+        /** @var class-string $classname */
+        $classname = $this->className;
         $entity = $this->om
-            ->getRepository($this->className)
+            ->getRepository($classname)
             ->find($id)
         ;
 

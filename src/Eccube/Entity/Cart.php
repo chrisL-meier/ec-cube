@@ -208,6 +208,16 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         }
 
         /**
+         * カートの中に出荷データがないので、空のコレクションを返します。
+         *
+         * @return ArrayCollection<int, empty>
+         */
+        public function getShippings()
+        {
+            return new ArrayCollection();
+        }
+
+        /**
          * @return \Eccube\Entity\Cart
          */
         public function clearCartItems()
@@ -228,7 +238,7 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         /**
          * Alias of getCartItems()
          *
-         * @return ItemCollection<int,CartItem>
+         * @return ItemCollection<int,\Eccube\Entity\ItemInterface>
          */
         public function getItems()
         {
@@ -271,6 +281,10 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * Alias of setTotalPrice.
+         *
+         * @param float|int|string $total
+         *
+         * @return Cart
          */
         public function setTotal($total)
         {
@@ -300,6 +314,8 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * @param ItemInterface $item
+         *
+         * @return void
          */
         public function addItem(ItemInterface $item)
         {
@@ -310,6 +326,8 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * @param ItemInterface $item
+         *
+         * @return void
          */
         public function removeItem(ItemInterface $item)
         {
@@ -330,6 +348,10 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * {@inheritdoc}
+         *
+         * @param float|int|string $total
+         *
+         * @return Cart
          */
         public function setDeliveryFeeTotal($total)
         {
@@ -356,6 +378,8 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * @param Customer|null $Customer
+         *
+         * @return Cart
          */
         public function setCustomer(Customer $Customer = null)
         {
@@ -438,6 +462,10 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * {@inheritdoc}
+         *
+         * @param int|float|string $total
+         *
+         * @return void
          */
         public function setDiscount($total)
         {
@@ -446,6 +474,10 @@ if (!class_exists('\Eccube\Entity\Cart')) {
 
         /**
          * {@inheritdoc}
+         *
+         * @param int|float|string $total
+         *
+         * @return void
          */
         public function setCharge($total)
         {
@@ -455,11 +487,35 @@ if (!class_exists('\Eccube\Entity\Cart')) {
         /**
          * {@inheritdoc}
          *
+         * @param int|float|string $total
+         *
+         * @return void
+         *
          * @deprecated
          */
         public function setTax($total)
         {
             // TODO quiet
+        }
+
+        /**
+         * 注文ではないので、nullを返します。
+         *
+         * @return null
+         */
+        public function getOrderStatus()
+        {
+            return null;
+        }
+
+        /**
+         * {@inheritdoc}
+         *
+         * @return ArrayCollection<int, empty>
+         */
+        public function getProductOrderItems()
+        {
+            return new ArrayCollection();
         }
     }
 }

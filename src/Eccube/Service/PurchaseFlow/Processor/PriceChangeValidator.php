@@ -24,10 +24,11 @@ use Eccube\Service\PurchaseFlow\PurchaseContext;
 class PriceChangeValidator extends ItemValidator
 {
     /**
-     * @param ItemInterface $item
-     * @param PurchaseContext $context
+     * @param ItemInterface $item 明細アイテム
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException
+     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException 販売価格が変更されている場合
      */
     public function validate(ItemInterface $item, PurchaseContext $context)
     {

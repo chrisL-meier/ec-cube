@@ -16,6 +16,7 @@ namespace Eccube\Service;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Persistence\Mapping\MappingException;
 use Eccube\Doctrine\ORM\Mapping\Driver\NopAnnotationDriver;
 use Eccube\Doctrine\ORM\Mapping\Driver\ReloadSafeAnnotationDriver;
 use Eccube\Util\StringUtil;
@@ -135,8 +136,9 @@ class SchemaService
     /**
      * ネームスペースに含まれるEntityのテーブルを削除する
      *
-     * @param  string $targetNamespace 削除対象のネームスペース
-     *
+     * @param string $targetNamespace 削除対象のネームスペース
+     * @throws MappingException
+     * @throws \ReflectionException
      * @return void
      */
     public function dropTable($targetNamespace)

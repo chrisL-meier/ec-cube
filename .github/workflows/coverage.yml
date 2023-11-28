@@ -44,7 +44,7 @@ jobs:
         uses: nanasess/setup-php@master
         with:
           php-version: ${{ matrix.php }}
-      
+
       - name: Setup pcov
         run: |
           sudo apt-fast install -y php8.1-pcov

@@ -62,6 +62,11 @@ class ShippingType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -269,6 +274,13 @@ class ShippingType extends AbstractType
         });
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(

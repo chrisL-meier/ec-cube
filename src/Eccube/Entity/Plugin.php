@@ -200,7 +200,7 @@ if (!class_exists('\Eccube\Entity\Plugin')) {
         /**
          * Set source.
          *
-         * @param string $source
+         * @param string|int $source
          *
          * @return Plugin
          */

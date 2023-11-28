@@ -18,16 +18,21 @@ interface PurchaseInterface
     /**
      * 合計金額を設定します。
      *
-     * @param $total|int
+     * @param int|float|string $total
+     *
+     * @return \Eccube\Entity\ItemHolderInterface
      */
     public function setTotal($total);
 
     /**
      * 合計金額を返す。
      *
-     * @return int
+     * @return int|float|string|null
      */
     public function getTotal();
 
+    /**
+     * @return \Eccube\Service\PurchaseFlow\ItemCollection<int,\Eccube\Entity\ItemInterface>
+     */
     public function getItems();
 }

@@ -83,6 +83,7 @@ class PluginApiService
 
     /**
      * @param mixed $apiUrl
+     * @return void
      */
     public function setApiUrl($apiUrl)
     {
@@ -91,8 +92,7 @@ class PluginApiService
 
     /**
      * Get master data: category
-     *
-     * @return array|bool|string
+     * @return string|bool|array<string, string|int|array<int, string>>
      */
     public function getCategory()
     {
@@ -108,9 +108,8 @@ class PluginApiService
     /**
      * Get plugins list
      *
-     * @param $data
-     *
-     * @return array
+     * @param array<string, string|int> $data
+     * @return array<string, string|int>
      *
      * @throws PluginApiException
      */
@@ -137,8 +136,7 @@ class PluginApiService
     /**
      * Get purchased plugins list
      *
-     * @return array
-     *
+     * @return array<int, array<string, string|int>>
      * @throws PluginApiException
      */
     public function getPurchased()
@@ -154,8 +152,7 @@ class PluginApiService
     /**
      * Get recommended plugins list
      *
-     * @return array($result, $info)
-     *
+     * @return array<int, array<string, string|int>>
      * @throws PluginApiException
      */
     public function getRecommended()
@@ -168,6 +165,10 @@ class PluginApiService
         return $this->buildPlugins($plugins);
     }
 
+    /**
+     * @param array<int, array<string, string|int>> $plugins
+     * @return array<int, array<string, string|int>>
+     */
     private function buildPlugins(&$plugins)
     {
         /** @var Plugin[] $pluginInstalled */
@@ -215,7 +216,7 @@ class PluginApiService
      *
      * @param int|string $id Id or plugin code
      *
-     * @return array
+     * @return array<string, string|int|array<int, string>>
      *
      * @throws PluginApiException
      */
@@ -229,26 +230,47 @@ class PluginApiService
         return $this->buildInfo($json);
     }
 
+    /**
+     * @param Plugin $Plugin
+     * @return void
+     */
     public function pluginInstalled(Plugin $Plugin)
     {
         $this->updatePluginStatus('/status/installed', $Plugin);
     }
 
+    /**
+     * @param Plugin $Plugin
+     * @return void
+     */
     public function pluginEnabled(Plugin $Plugin)
     {
         $this->updatePluginStatus('/status/enabled', $Plugin);
     }
 
+    /**
+     * @param Plugin $Plugin
+     * @return void
+     */
     public function pluginDisabled(Plugin $Plugin)
     {
         $this->updatePluginStatus('/status/disabled', $Plugin);
     }
 
+    /**
+     * @param Plugin $Plugin
+     * @return void
+     */
     public function pluginUninstalled(Plugin $Plugin)
     {
         $this->updatePluginStatus('/status/uninstalled', $Plugin);
     }
 
+    /**
+     * @param string $url
+     * @param Plugin $Plugin
+     * @return void
+     */
     private function updatePluginStatus($url, Plugin $Plugin)
     {
         if ($Plugin->getSource()) {
@@ -263,9 +285,10 @@ class PluginApiService
      * API request processing
      *
      * @param string $url
-     * @param array $data
+     * @param array<string, mixed> $data
+     * @param bool $post
      *
-     * @return bool|string
+     * @return string|bool
      *
      * @throws PluginApiException
      */
@@ -328,9 +351,8 @@ class PluginApiService
     /**
      * Get plugin information
      *
-     * @param array $plugin
-     *
-     * @return array
+     * @param array<string, string|int|array<int, string>>  $plugin
+     * @return array<string, string|int|array<int, string>>
      */
     public function buildInfo(&$plugin)
     {
@@ -341,8 +363,8 @@ class PluginApiService
 
     /**
      * Check support version
-     *
-     * @param $plugin
+     * @param array<string, string|int|array<int, string|float>> $plugin
+     * @return void
      */
     public function supportedVersion(&$plugin)
     {

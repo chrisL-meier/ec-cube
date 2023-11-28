@@ -108,9 +108,9 @@ class EccubeExtension extends AbstractExtension
     /**
      * Name of this extension
      *
-     * @param array $menus
+     * @param array<mixed> $menus
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getActiveMenus($menus = [])
     {
@@ -124,6 +124,7 @@ class EccubeExtension extends AbstractExtension
 
     /**
      * return No Image filename
+     * @param string|null $image
      *
      * @return string
      */
@@ -134,6 +135,11 @@ class EccubeExtension extends AbstractExtension
 
     /**
      * Name of this extension
+     *
+     * @param \DateTime|null $date
+     * @param string $value
+     * @param string $format
+     *
      *
      * @return string
      */
@@ -149,6 +155,11 @@ class EccubeExtension extends AbstractExtension
     /**
      * Name of this extension
      *
+     * @param float|int|string $number
+     * @param int|null $decimals
+     * @param string|null $decPoint
+     * @param string|null $thousandsSep
+     *
      * @return string
      */
     public function getPriceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
@@ -163,6 +174,10 @@ class EccubeExtension extends AbstractExtension
     /**
      * Name of this extension
      *
+     * @param string $value
+     * @param int $length
+     * @param string $end
+     *
      * @return string
      */
     public function getEllipsis($value, $length = 100, $end = '...')
@@ -172,6 +187,8 @@ class EccubeExtension extends AbstractExtension
 
     /**
      * Name of this extension
+     *
+     * @param \DateTimeInterface|string|null $date
      *
      * @return string
      */
@@ -208,7 +225,7 @@ class EccubeExtension extends AbstractExtension
      * Productが取得できない場合、または非公開の場合、商品情報は表示させない。
      * デバッグ環境以外ではProductが取得できなくでもエラー画面は表示させず無視される。
      *
-     * @param $id
+     * @param int|float|string $id
      *
      * @return Product|null
      */
@@ -289,8 +306,8 @@ class EccubeExtension extends AbstractExtension
     /**
      * Display file extension icon
      *
-     * @param $ext
-     * @param $attr
+     * @param string $ext
+     * @param array<string,string> $attr
      * @param bool $iconOnly アイコンのクラス名のみ返す場合はtrue
      *
      * @return string

@@ -47,6 +47,7 @@ class OrderNoProcessor implements ItemHolderPreprocessor
 
     /**
      * {@inheritdoc}
+     * @return void
      */
     public function process(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

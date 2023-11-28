@@ -40,6 +40,10 @@ class SystemController
     /**
      * @Route("/%eccube_admin_route%/setting/system/system", name="admin_setting_system_system", methods={"GET"})
      * @Template("@admin/Setting/System/system.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -60,6 +64,10 @@ class SystemController
 
     /**
      * @Route("/%eccube_admin_route%/setting/system/system/phpinfo", name="admin_setting_system_system_phpinfo", methods={"GET"})
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function phpinfo(Request $request)
     {

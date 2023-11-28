@@ -63,6 +63,10 @@ class MemberController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/member", name="admin_setting_system_member", methods={"GET", "PUT"})
      * @Template("@admin/Setting/System/member.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -90,6 +94,10 @@ class MemberController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/member/new", name="admin_setting_system_member_new", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/member_edit.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function create(Request $request)
     {
@@ -141,6 +149,11 @@ class MemberController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/member/{id}/edit", requirements={"id" = "\d+"}, name="admin_setting_system_member_edit", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/member_edit.twig")
+     *
+     * @param Request $request
+     * @param Member $Member
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function edit(Request $request, Member $Member)
     {
@@ -200,6 +213,12 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/system/member/{id}/up", requirements={"id" = "\d+"}, name="admin_setting_system_member_up", methods={"PUT"})
+     *
+     * @param Request $request
+     * @param Member $Member
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function up(Request $request, Member $Member)
     {
@@ -220,6 +239,12 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/system/member/{id}/down", requirements={"id" = "\d+"}, name="admin_setting_system_member_down", methods={"PUT"})
+     *
+     * @param Request $request
+     * @param Member $Member
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function down(Request $request, Member $Member)
     {
@@ -240,6 +265,12 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/system/member/{id}/delete", requirements={"id" = "\d+"}, name="admin_setting_system_member_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param Member $Member
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws ForeignKeyConstraintViolationException|\Exception
      */
     public function delete(Request $request, Member $Member)
     {

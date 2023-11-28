@@ -24,6 +24,10 @@ class PrefType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -35,6 +39,8 @@ class PrefType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @return string
      */
     public function getBlockPrefix()
     {
@@ -43,6 +49,8 @@ class PrefType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @return string
      */
     public function getParent()
     {

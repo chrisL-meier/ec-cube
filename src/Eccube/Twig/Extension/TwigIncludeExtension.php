@@ -13,11 +13,21 @@
 
 namespace Eccube\Twig\Extension;
 
+use Eccube\Common\EccubeConfig;
+use Eccube\Entity\BaseInfo;
+use Eccube\Entity\Block;
+use Eccube\Entity\Layout;
+use Eccube\Entity\Page;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TwigIncludeExtension extends AbstractExtension
 {
+    /**
+     * @var \Twig\Environment
+     */
     protected $twig;
 
     public function __construct(\Twig\Environment $twig)
@@ -33,6 +43,15 @@ class TwigIncludeExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param array<string, AppVariable|BaseInfo|EccubeConfig|TraceableEventDispatcher|Layout|Page|string|boolean|array<int, Block>|array<int, mixed>|int|Block> $context
+     * @param string $template
+     * @param array<string, mixed> $variables
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function include_dispatch($context, $template, $variables = [])
     {
         if (!empty($variables)) {

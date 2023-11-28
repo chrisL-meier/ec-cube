@@ -13,48 +13,96 @@
 
 use Eccube\DependencyInjection\Facade\LoggerFacade;
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_emergency($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->emergency($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_alert($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->alert($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_critical($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->critical($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_error($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->error($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_warning($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->warning($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_notice($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->notice($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_info($message, array $context = [])
 {
     $logger = LoggerFacade::create();
     $logger->info($message, $context);
 }
 
+/**
+ * @param string $message
+ * @param array<mixed> $context
+ * @return void
+ * @throws Exception
+ */
 function log_debug($message, array $context = [])
 {
     $logger = LoggerFacade::create();
@@ -64,7 +112,7 @@ function log_debug($message, array $context = [])
 /**
  * プラグイン用ログ出力関数
  *
- * @param $channel 設定されたchannel名
+ * @param string $channel 設定されたchannel名
  *
  * @return \Symfony\Bridge\Monolog\Logger
  */

@@ -43,6 +43,10 @@ class AuthorityController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/authority", name="admin_setting_system_authority", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/authority.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {

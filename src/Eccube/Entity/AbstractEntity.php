@@ -25,7 +25,11 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-/** @MappedSuperclass */
+/**
+ * @MappedSuperclass
+ *
+ * @implements \ArrayAccess<string|int, mixed>
+ */
 abstract class AbstractEntity implements \ArrayAccess
 {
     #[\ReturnTypeWillChange]
@@ -71,9 +75,11 @@ abstract class AbstractEntity implements \ArrayAccess
      * 引数の連想配列を元にプロパティを設定します.
      * DBから取り出した連想配列を, プロパティへ設定する際に使用します.
      *
-     * @param array $arrProps プロパティの情報を格納した連想配列
-     * @param \ReflectionClass $parentClass 親のクラス. 本メソッドの内部的に使用します.
+     * @param array<string,mixed> $arrProps プロパティの情報を格納した連想配列
+     * @param \ReflectionClass<$this>|null $parentClass 親のクラス. 本メソッドの内部的に使用します.
      * @param string[] $excludeAttribute 除外したいフィールド名の配列
+     *
+     * @return void
      */
     public function setPropertiesFromArray(array $arrProps, array $excludeAttribute = [], \ReflectionClass $parentClass = null)
     {
@@ -105,10 +111,10 @@ abstract class AbstractEntity implements \ArrayAccess
      * Symfony Serializer Component is expensive, and hard to implementation.
      * Use for encoder only.
      *
-     * @param \ReflectionClass $parentClass parent class. Use internally of this method..
-     * @param array $excludeAttribute Array of field names to exclusion.
+     * @param \ReflectionClass<$this>|null  $parentClass parent class. Use internally of this method..
+     * @param array|string[] $excludeAttribute Array of field names to exclusion.
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public function toArray(array $excludeAttribute = ['__initializer__', '__cloner__', '__isInitialized__'], \ReflectionClass $parentClass = null)
     {
@@ -151,9 +157,9 @@ abstract class AbstractEntity implements \ArrayAccess
      * - AbstractEntity :: associative array such as [id => value]
      * - PersistentCollection :: associative array of [[id => value], [id => value], ...]
      *
-     * @param array $excludeAttribute Array of field names to exclusion.
+     * @param array|string[] $excludeAttribute Array of field names to exclusion.
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public function toNormalizedArray(array $excludeAttribute = ['__initializer__', '__cloner__', '__isInitialized__'])
     {
@@ -182,7 +188,7 @@ abstract class AbstractEntity implements \ArrayAccess
     /**
      * Convert to JSON.
      *
-     * @param array $excludeAttribute Array of field names to exclusion.
+     * @param array|string[] $excludeAttribute Array of field names to exclusion.
      *
      * @return string
      */
@@ -194,7 +200,7 @@ abstract class AbstractEntity implements \ArrayAccess
     /**
      * Convert to XML.
      *
-     * @param array $excludeAttribute Array of field names to exclusion.
+     * @param array<int|string,mixed> $excludeAttribute Array of field names to exclusion.
      *
      * @return string
      */
@@ -232,7 +238,7 @@ abstract class AbstractEntity implements \ArrayAccess
      *
      * @param AbstractEntity $Entity
      *
-     * @return array associative array of [[id => value], [id => value], ...]
+     * @return array<mixed> associative array of [[id => value], [id => value], ...]
      */
     public function getEntityIdentifierAsArray(AbstractEntity $Entity)
     {

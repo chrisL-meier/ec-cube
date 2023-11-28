@@ -38,7 +38,7 @@ class ShippingRepository extends AbstractRepository
      * @param \Eccube\Entity\Order|null $Order
      * @param \Eccube\Entity\ProductClass|null $productClass
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function findShippingsProduct($Order, $productClass)
     {

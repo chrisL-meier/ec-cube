@@ -108,7 +108,7 @@ class PluginController extends AbstractController
      * @Route("/%eccube_admin_route%/store/plugin", name="admin_store_plugin", methods={"GET"})
      * @Template("@admin/Store/plugin.twig")
      *
-     * @return array
+     * @return array<string,mixed>
      *
      * @throws PluginException
      */
@@ -479,7 +479,7 @@ class PluginController extends AbstractController
      * @param Request $request
      * @param CacheUtil $cacheUtil
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      */
     public function install(Request $request, CacheUtil $cacheUtil)
     {
@@ -544,8 +544,9 @@ class PluginController extends AbstractController
      * @Template("@admin/Store/authentication_setting.twig")
      *
      * @param Request $request
+     * @param CacheUtil $cacheUtil
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      */
     public function authenticationSetting(Request $request, CacheUtil $cacheUtil)
     {
@@ -579,9 +580,9 @@ class PluginController extends AbstractController
     /**
      * フォルダ設置のみのプラグインを取得する.
      *
-     * @param array $plugins
+     * @param array<mixed> $plugins
      *
-     * @return array
+     * @return array<mixed>
      *
      * @throws PluginException
      */

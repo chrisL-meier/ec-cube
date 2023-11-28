@@ -55,6 +55,10 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $sessionId
+     *
+     * @return false|string
      */
     protected function doRead($sessionId)
     {
@@ -63,6 +67,11 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $sessionId
+     * @param mixed $data
+     *
+     * @return bool
      */
     #[\ReturnTypeWillChange]
     public function updateTimestamp($sessionId, $data)
@@ -72,6 +81,11 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $sessionId
+     * @param mixed $data
+     *
+     * @return bool
      */
     protected function doWrite($sessionId, $data)
     {
@@ -82,6 +96,11 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
      * {@inheritdoc}
      *
      * @see https://github.com/symfony/symfony/blob/2adc85d49cbe14e346068fa7e9c2e1f08ab31de6/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/AbstractSessionHandler.php#L126-L167
+     *
+     * @param string $sessionId
+     *
+     * @return bool
+     * @throws \LogicException
      */
     #[\ReturnTypeWillChange]
     public function destroy($sessionId)
@@ -137,6 +156,10 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $sessionId
+     *
+     * @return bool
      */
     protected function doDestroy($sessionId)
     {
@@ -145,6 +168,8 @@ class SameSiteNoneCompatSessionHandler extends StrictSessionHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @return bool
      */
     #[\ReturnTypeWillChange]
     public function close()

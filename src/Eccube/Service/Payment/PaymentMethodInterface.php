@@ -53,7 +53,7 @@ interface PaymentMethodInterface
     /**
      * PaymentMethod の処理に必要な FormInterface を設定します.
      *
-     * @param FormInterface $form
+     * @param $form FormInterface $form
      *
      * @return $this
      */

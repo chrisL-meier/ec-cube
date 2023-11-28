@@ -26,11 +26,24 @@ class SecurityPolicyDecorator implements SecurityPolicyInterface {
         $this->securityPolicy = $securityPolicy;
     }
 
+    /**
+     * @param array<mixed> $tags
+     * @param array<mixed> $filters
+     * @param array<mixed> $functions
+     * @return void
+     * @throws \Twig\Sandbox\SecurityError
+     */
     public function checkSecurity($tags, $filters, $functions)
     {
         $this->securityPolicy->checkSecurity($tags, $filters, $functions);
     }
 
+    /**
+     * @param mixed $obj
+     * @param string $method
+     * @return void
+     * @throws \Twig\Sandbox\SecurityNotAllowedMethodError
+     */
     public function checkMethodAllowed($obj, $method)
     {
         // __toStringの場合はチェックをスキップする
@@ -40,6 +53,12 @@ class SecurityPolicyDecorator implements SecurityPolicyInterface {
         $this->securityPolicy->checkMethodAllowed($obj, $method);
     }
 
+    /**
+     * @param mixed $obj
+     * @param string $method
+     * @return void
+     * @throws \Twig\Sandbox\SecurityNotAllowedPropertyError
+     */
     public function checkPropertyAllowed($obj, $method)
     {
         $this->securityPolicy->checkPropertyAllowed($obj, $method);

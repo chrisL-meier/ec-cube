@@ -17,7 +17,6 @@ use Eccube\Entity\BaseInfo;
 use Eccube\Entity\ItemHolderInterface;
 use Eccube\Entity\ItemInterface;
 use Eccube\Entity\Order;
-use Eccube\Entity\OrderItem;
 use Eccube\Repository\BaseInfoRepository;
 use Eccube\Service\PurchaseFlow\ItemHolderPostValidator;
 use Eccube\Service\PurchaseFlow\PurchaseContext;
@@ -45,6 +44,8 @@ class AddPointProcessor extends ItemHolderPostValidator
     /**
      * @param ItemHolderInterface $itemHolder
      * @param PurchaseContext $context
+     *
+     * @return void
      */
     public function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {
@@ -71,7 +72,6 @@ class AddPointProcessor extends ItemHolderPostValidator
         // 明細ごとのポイントを集計
         $totalPoint = array_reduce($itemHolder->getItems()->toArray(),
             function ($carry, ItemInterface $item) use ($basicPointRate) {
-
                 $pointRate = $item->getPointRate() ? $item->getPointRate() : null;
 
                 if ($pointRate === null) {
@@ -92,7 +92,7 @@ class AddPointProcessor extends ItemHolderPostValidator
 
                 return $carry + $point;
             }, 0);
-
+        /** @var float|int $totalPoint */
         return $totalPoint < 0 ? 0 : $totalPoint;
     }
 

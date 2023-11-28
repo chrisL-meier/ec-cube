@@ -27,6 +27,10 @@ class TokenProcessor
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @param array<string, array<int, mixed>> $records
+     * @return array<string, array<string, mixed>>
+     */
     public function __invoke(array $records)
     {
         $records['extra']['user_id'] = 'N/A';

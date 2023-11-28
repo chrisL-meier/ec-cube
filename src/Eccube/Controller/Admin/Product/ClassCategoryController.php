@@ -65,6 +65,13 @@ class ClassCategoryController extends AbstractController
      * @Route("/%eccube_admin_route%/product/class_category/{class_name_id}", requirements={"class_name_id" = "\d+"}, name="admin_product_class_category", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/product/class_category/{class_name_id}/{id}/edit", requirements={"class_name_id" = "\d+", "id" = "\d+"}, name="admin_product_class_category_edit", methods={"GET", "POST"})
      * @Template("@admin/Product/class_category.twig")
+     *
+     * @param Request $request
+     * @param string $class_name_id
+     * @param string|null $id
+     *
+     * @return  \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function index(Request $request, $class_name_id, $id = null)
     {
@@ -156,6 +163,13 @@ class ClassCategoryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/class_category/{class_name_id}/{id}/delete", requirements={"class_name_id" = "\d+", "id" = "\d+"}, name="admin_product_class_category_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param string $class_name_id
+     * @param string $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws NotFoundHttpException
      */
     public function delete(Request $request, $class_name_id, $id)
     {
@@ -202,6 +216,13 @@ class ClassCategoryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/class_category/{class_name_id}/{id}/visibility", requirements={"class_name_id" = "\d+", "id" = "\d+"}, name="admin_product_class_category_visibility", methods={"PUT"})
+     *
+     * @param Request $request
+     * @param string $class_name_id
+     * @param string $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws NotFoundHttpException
      */
     public function visibility(Request $request, $class_name_id, $id)
     {
@@ -245,6 +266,11 @@ class ClassCategoryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/class_category/sort_no/move", name="admin_product_class_category_sort_no_move", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return Response|void
+     * @throws BadRequestHttpException
      */
     public function moveSortNo(Request $request)
     {

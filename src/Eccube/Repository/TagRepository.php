@@ -33,6 +33,8 @@ class TagRepository extends AbstractRepository
      * タグを保存する.
      *
      * @param  Tag $tag タグ
+     *
+     * @return void
      */
     public function save($tag)
     {
@@ -67,6 +69,8 @@ class TagRepository extends AbstractRepository
      * タグを削除する.
      *
      * @param  Tag $Tag 削除対象のタグ
+     *
+     * @return void
      */
     public function delete($Tag)
     {

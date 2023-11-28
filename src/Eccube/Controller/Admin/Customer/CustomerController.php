@@ -89,6 +89,12 @@ class CustomerController extends AbstractController
      * @Route("/%eccube_admin_route%/customer", name="admin_customer", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/customer/page/{page_no}", requirements={"page_no" = "\d+"}, name="admin_customer_page", methods={"GET", "POST"})
      * @Template("@admin/Customer/index.twig")
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param string|null $page_no
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -183,6 +189,12 @@ class CustomerController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/customer/{id}/resend", requirements={"id" = "\d+"}, name="admin_customer_resend", methods={"GET"})
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function resend(Request $request, $id)
     {
@@ -224,6 +236,12 @@ class CustomerController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/customer/{id}/delete", requirements={"id" = "\d+"}, name="admin_customer_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param string $id
+     * @param TranslatorInterface $translator
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function delete(Request $request, $id, TranslatorInterface $translator)
     {

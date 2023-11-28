@@ -48,6 +48,9 @@ class PluginGenerateCommand extends Command
         $this->container = $container;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -57,12 +60,24 @@ class PluginGenerateCommand extends Command
             ->setDescription('Generate plugin skeleton.');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
         $this->fs = new Filesystem();
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (null !== $input->getArgument('name') && null !== $input->getArgument('code') && null !== $input->getArgument('ver')) {
@@ -124,6 +139,11 @@ class PluginGenerateCommand extends Command
         return 0;
     }
 
+    /**
+     * @param string|null $code
+     *
+     * @return string
+     */
     public function validateCode($code)
     {
         if (empty($code)) {
@@ -144,6 +164,11 @@ class PluginGenerateCommand extends Command
         return $code;
     }
 
+    /**
+     * @param string $version
+     *
+     * @return mixed
+     */
     public function validateVersion($version)
     {
         // TODO
@@ -152,6 +177,8 @@ class PluginGenerateCommand extends Command
 
     /**
      * @param string $pluginDir
+     *
+     * @return void
      */
     protected function createDirectories($pluginDir)
     {
@@ -174,6 +201,11 @@ class PluginGenerateCommand extends Command
 
     /**
      * @param string $pluginDir
+     * @param string $name
+     * @param mixed $code
+     * @param mixed $version
+     *
+     * @return void
      */
     protected function createConfig($pluginDir, $name, $code, $version)
     {
@@ -198,6 +230,8 @@ EOL;
 
     /**
      * @param string $pluginDir
+     *
+     * @return void
      */
     protected function createGithubActions($pluginDir)
     {
@@ -237,6 +271,8 @@ jobs:
 
     /**
      * @param string $pluginDir
+     *
+     * @return void
      */
     protected function createMessages($pluginDir)
     {
@@ -246,6 +282,9 @@ jobs:
 
     /**
      * @param string $pluginDir
+     * @param string $code
+     *
+     * @return void
      */
     protected function createTwigBlock($pluginDir, $code)
     {
@@ -273,6 +312,9 @@ EOL;
 
     /**
      * @param string $pluginDir
+     * @param string $code
+     *
+     * @return void
      */
     protected function createNav($pluginDir, $code)
     {
@@ -300,6 +342,9 @@ EOL;
 
     /**
      * @param string $pluginDir
+     * @param string $code
+     *
+     * @return void
      */
     protected function createEvent($pluginDir, $code)
     {
@@ -327,6 +372,9 @@ EOL;
 
     /**
      * @param string $pluginDir
+     * @param string $code
+     *
+     * @return void
      */
     protected function createConfigController($pluginDir, $code)
     {

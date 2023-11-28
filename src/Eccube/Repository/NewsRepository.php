@@ -15,8 +15,6 @@ namespace Eccube\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\DBAL\Exception\DriverException;
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 use Eccube\Entity\News;
 
@@ -37,6 +35,8 @@ class NewsRepository extends AbstractRepository
      * 新着情報を登録します.
      *
      * @param $News
+     *
+     * @return void
      */
     public function save($News)
     {
@@ -50,8 +50,7 @@ class NewsRepository extends AbstractRepository
      *
      * @param News $News
      *
-     * @throws ForeignKeyConstraintViolationException 外部キー制約違反の場合
-     * @throws DriverException SQLiteの場合, 外部キー制約違反が発生すると, DriverExceptionをthrowします.
+     * @return void
      */
     public function delete($News)
     {
@@ -73,7 +72,7 @@ class NewsRepository extends AbstractRepository
     }
 
     /**
-     * @return News[]|ArrayCollection
+     * @return ArrayCollection<int, object>
      */
     public function getList()
     {

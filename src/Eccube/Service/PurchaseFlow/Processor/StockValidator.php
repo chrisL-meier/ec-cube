@@ -23,10 +23,10 @@ use Eccube\Service\PurchaseFlow\PurchaseContext;
 class StockValidator extends ItemValidator
 {
     /**
-     * @param ItemInterface $item
-     * @param PurchaseContext $context
-     *
-     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException
+     * @param ItemInterface $item 商品
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
+     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException 在庫切れの場合
      */
     protected function validate(ItemInterface $item, PurchaseContext $context)
     {
@@ -46,6 +46,11 @@ class StockValidator extends ItemValidator
         }
     }
 
+    /**
+     * @param ItemInterface $item 商品
+     * @param PurchaseContext $context  購入フローのコンテキスト
+     * @return void
+     */
     protected function handle(ItemInterface $item, PurchaseContext $context)
     {
         $stock = $item->getProductClass()->getStock();

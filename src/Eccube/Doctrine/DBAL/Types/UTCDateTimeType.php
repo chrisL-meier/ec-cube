@@ -95,12 +95,18 @@ class UTCDateTimeType extends DateTimeType
 
     /**
      * @param string $timezone
+     *
+     * @return void
      */
     public static function setTimeZone($timezone = 'Asia/Tokyo')
     {
         self::$timezone = new \DateTimeZone($timezone);
     }
 
+    /**
+     * @param AbstractPlatform $platform
+     * @return true
+     */
     public function requiresSQLCommentHint(AbstractPlatform $platform)
     {
         return true;

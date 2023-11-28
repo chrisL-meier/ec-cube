@@ -29,6 +29,8 @@ class AbstractShoppingController extends AbstractController
     /**
      * @param PurchaseFlow $shoppingPurchaseFlow
      * @required
+     *
+     * @return void
      */
     public function setPurchaseFlow(PurchaseFlow $shoppingPurchaseFlow)
     {

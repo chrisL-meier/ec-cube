@@ -68,6 +68,9 @@ if (!class_exists('\Eccube\Entity\Category')) {
             return $this;
         }
 
+        /**
+         * @return array<mixed>
+         */
         public function getParents()
         {
             $path = $this->getPath();
@@ -76,6 +79,9 @@ if (!class_exists('\Eccube\Entity\Category')) {
             return $path;
         }
 
+        /**
+         * @return array<mixed>
+         */
         public function getPath()
         {
             $path = [];
@@ -94,11 +100,17 @@ if (!class_exists('\Eccube\Entity\Category')) {
             return array_reverse($path);
         }
 
+        /**
+         * @return string
+         */
         public function getNameWithLevel()
         {
             return str_repeat('　', $this->getHierarchy() - 1).$this->getName();
         }
 
+        /**
+         * @return array<int,mixed>
+         */
         public function getDescendants()
         {
             $DescendantCategories = [];
@@ -115,6 +127,9 @@ if (!class_exists('\Eccube\Entity\Category')) {
             return $DescendantCategories;
         }
 
+        /**
+         * @return Category[]|mixed[]
+         */
         public function getSelfAndDescendants()
         {
             return array_merge([$this], $this->getDescendants());

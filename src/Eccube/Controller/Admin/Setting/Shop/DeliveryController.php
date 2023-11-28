@@ -93,6 +93,10 @@ class DeliveryController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/shop/delivery", name="admin_setting_shop_delivery", methods={"GET"})
      * @Template("@admin/Setting/Shop/delivery.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -116,6 +120,13 @@ class DeliveryController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/shop/delivery/new", name="admin_setting_shop_delivery_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/setting/shop/delivery/{id}/edit", requirements={"id" = "\d+"}, name="admin_setting_shop_delivery_edit", methods={"GET", "POST"})
      * @Template("@admin/Setting/Shop/delivery_edit.twig")
+     *
+     * @param Request $request
+     * @param EccubeExtension $extension
+     * @param string|int|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function edit(Request $request, EccubeExtension $extension, $id = null)
     {
@@ -291,6 +302,11 @@ class DeliveryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/shop/delivery/{id}/delete", requirements={"id" = "\d+"}, name="admin_setting_shop_delivery_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param Delivery $Delivery
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function delete(Request $request, Delivery $Delivery)
     {
@@ -334,6 +350,11 @@ class DeliveryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/shop/delivery/{id}/visibility", requirements={"id" = "\d+"}, name="admin_setting_shop_delivery_visibility", methods={"PUT"})
+     *
+     * @param Request $request
+     * @param Delivery $Delivery
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function visibility(Request $request, Delivery $Delivery)
     {
@@ -366,6 +387,11 @@ class DeliveryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/shop/delivery/sort_no/move", name="admin_setting_shop_delivery_sort_no_move", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws BadRequestHttpException
      */
     public function moveSortNo(Request $request)
     {
@@ -391,7 +417,7 @@ class DeliveryController extends AbstractController
      *
      * @param Payment[] $PaymentsData
      *
-     * @return array
+     * @return array<int,array<string,float|null|string>>
      */
     private function getMergeRules(array $PaymentsData)
     {

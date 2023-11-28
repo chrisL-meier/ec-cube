@@ -122,6 +122,10 @@ class EntryController extends AbstractController
      * @Route("/entry", name="entry", methods={"GET", "POST"})
      * @Route("/entry", name="entry_confirm", methods={"GET", "POST"})
      * @Template("Entry/index.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -232,6 +236,8 @@ class EntryController extends AbstractController
      *
      * @Route("/entry/complete", name="entry_complete", methods={"GET"})
      * @Template("Entry/complete.twig")
+     *
+     * @return array<empty>
      */
     public function complete()
     {
@@ -243,6 +249,13 @@ class EntryController extends AbstractController
      *
      * @Route("/entry/activate/{secret_key}/{qtyInCart}", name="entry_activate", methods={"GET"})
      * @Template("Entry/activate.twig")
+     *
+     * @param Request $request
+     * @param string $secret_key
+     * @param string|null $qtyInCart
+     *
+     * @return array<string,mixed>
+     * @throws HttpException\NotFoundHttpException
      */
     public function activate(Request $request, $secret_key, $qtyInCart = null)
     {
@@ -282,7 +295,7 @@ class EntryController extends AbstractController
      * 会員登録処理を行う
      *
      * @param Request $request
-     * @param $secret_key
+     * @param string $secret_key
      *
      * @return \Eccube\Entity\Cart|mixed
      */

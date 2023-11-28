@@ -33,6 +33,10 @@ class PurchaseFlowResult
         $this->itemHolder = $itemHolder;
     }
 
+    /**
+     * @param ProcessResult $processResult
+     * @return void
+     */
     public function addProcessResult(ProcessResult $processResult)
     {
         $this->processResults[] = $processResult;
@@ -58,11 +62,17 @@ class PurchaseFlowResult
         });
     }
 
+    /**
+     * @return bool
+     */
     public function hasError()
     {
         return !empty($this->getErrors());
     }
 
+    /**
+     * @return bool
+     */
     public function hasWarning()
     {
         return !empty($this->getWarning());

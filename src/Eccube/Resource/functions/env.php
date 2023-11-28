@@ -11,6 +11,11 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * @param string $key
+ * @param mixed $default
+ * @return array|bool|mixed|string|null
+ */
 function env($key, $default = null)
 {
     $value = getenv($key);

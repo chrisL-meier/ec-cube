@@ -1088,7 +1088,7 @@ if (!class_exists('\Eccube\Entity\BaseInfo')) {
         /**
          * Get pointConversionRate
          *
-         * @return string|null
+         * @return string|null|int|float
          */
         public function getPointConversionRate()
         {

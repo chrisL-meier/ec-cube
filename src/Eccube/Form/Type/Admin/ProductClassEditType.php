@@ -81,6 +81,11 @@ class ProductClassEditType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -150,6 +155,10 @@ class ProductClassEditType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -162,6 +171,8 @@ class ProductClassEditType extends AbstractType
      * 各行の個別税率設定の制御.
      *
      * @param FormBuilderInterface $builder
+     *
+     * @return void
      */
     protected function setTaxRate(FormBuilderInterface $builder)
     {
@@ -184,6 +195,8 @@ class ProductClassEditType extends AbstractType
      * 各行の登録チェックボックスの制御.
      *
      * @param FormBuilderInterface $builder
+     *
+     * @return void
      */
     protected function setCheckbox(FormBuilderInterface $builder)
     {
@@ -205,6 +218,10 @@ class ProductClassEditType extends AbstractType
         });
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @return void
+     */
     protected function addValidations(FormBuilderInterface $builder)
     {
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
@@ -270,6 +287,12 @@ class ProductClassEditType extends AbstractType
         });
     }
 
+    /**
+     * @param string $key
+     * @param FormInterface $form
+     * @param ConstraintViolationListInterface $errors
+     * @return void
+     */
     protected function addErrors($key, FormInterface $form, ConstraintViolationListInterface $errors)
     {
         foreach ($errors as $error) {

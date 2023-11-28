@@ -31,6 +31,11 @@ if (!class_exists('\Eccube\Entity\Member')) {
      */
     class Member extends \Eccube\Entity\AbstractEntity implements UserInterface, \Serializable
     {
+        /**
+         * @param ClassMetadata $metadata
+         *
+         * @return void
+         */
         public static function loadValidatorMetadata(ClassMetadata $metadata)
         {
             $metadata->addConstraint(new UniqueEntity([
@@ -65,6 +70,8 @@ if (!class_exists('\Eccube\Entity\Member')) {
 
         /**
          * {@inheritdoc}
+         *
+         * @return void
          */
         public function eraseCredentials()
         {
@@ -103,6 +110,8 @@ if (!class_exists('\Eccube\Entity\Member')) {
         /**
          * @Assert\NotBlank()
          * @Assert\Length(max=4096)
+         *
+         * @var string|null
          */
         private $plainPassword;
 

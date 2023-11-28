@@ -102,6 +102,8 @@ class LayoutController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/content/layout", name="admin_content_layout", methods={"GET"})
      * @Template("@admin/Content/layout_list.twig")
+     *
+     * @return array<string,mixed>
      */
     public function index()
     {
@@ -151,6 +153,14 @@ class LayoutController extends AbstractController
      * @Route("/%eccube_admin_route%/content/layout/new", name="admin_content_layout_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/content/layout/{id}/edit", requirements={"id" = "\d+"}, name="admin_content_layout_edit", methods={"GET", "POST"})
      * @Template("@admin/Content/layout.twig")
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     * @param string|null $id
+     * @param string|null $previewPageId
+     *
+     * @return RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function edit(Request $request, CacheUtil $cacheUtil, $id = null, $previewPageId = null)
     {
@@ -273,6 +283,10 @@ class LayoutController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/content/layout/{id}/preview", requirements={"id" = "\d+"}, name="admin_content_layout_preview", methods={"POST"})
+     *
+     * @param string $id
+     *
+     * @return RedirectResponse|array<string,mixed>
      */
     public function preview(Request $request, $id, CacheUtil $cacheUtil)
     {

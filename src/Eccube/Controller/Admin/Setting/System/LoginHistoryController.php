@@ -57,9 +57,11 @@ class LoginHistoryController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/system/login_history/{page_no}", requirements={"page_no" = "\d+"}, name="admin_setting_system_login_history_page", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/login_history.twig")
      *
-     * @param integer $page_no
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param integer|null $page_no
      *
-     * @return \Symfony\Component\HttpFoundation\Response|array
+     * @return \Symfony\Component\HttpFoundation\Response|array<string,mixed>
      */
     public function index(Request $request, PaginatorInterface $paginator, $page_no = null)
     {

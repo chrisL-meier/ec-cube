@@ -54,7 +54,7 @@ class NewsController extends AbstractController
      * @param int $page_no
      * @param PaginatorInterface $paginator
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public function index(Request $request, PaginatorInterface $paginator, $page_no = 1)
     {
@@ -89,7 +89,7 @@ class NewsController extends AbstractController
      * @param Request $request
      * @param int|null $id
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array<string,mixed>|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function edit(Request $request, CacheUtil $cacheUtil, $id = null)
     {

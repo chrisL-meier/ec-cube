@@ -76,6 +76,12 @@ class ChangeController extends AbstractController
      *
      * @Route("/mypage/change", name="mypage_change", methods={"GET", "POST"})
      * @Template("Mypage/change.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws \Twig\Error\LoaderError|\Twig\Error\RuntimeError|\Twig\Error\SyntaxError
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function index(Request $request)
     {
@@ -155,6 +161,10 @@ class ChangeController extends AbstractController
      *
      * @Route("/mypage/change_complete", name="mypage_change_complete", methods={"GET"})
      * @Template("Mypage/change_complete.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<empty>
      */
     public function complete(Request $request)
     {

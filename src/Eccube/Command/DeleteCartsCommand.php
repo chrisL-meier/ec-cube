@@ -69,6 +69,9 @@ class DeleteCartsCommand extends Command
         $this->cartRepository = $cartRepository;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -76,6 +79,12 @@ class DeleteCartsCommand extends Command
             ->addArgument('date', InputArgument::REQUIRED, 'Deletes carts before the specified date');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     * @throws \Exception
+     */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (null !== $input->getArgument('date')) {
@@ -102,6 +111,12 @@ class DeleteCartsCommand extends Command
         $input->setArgument('date', $dateStr);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     * @throws \Exception
+     */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
@@ -123,6 +138,10 @@ class DeleteCartsCommand extends Command
         return 0;
     }
 
+    /**
+     * @param \DateTime $dateTime
+     * @return void
+     */
     protected function deleteCarts(\DateTime $dateTime)
     {
         try {
@@ -147,6 +166,9 @@ class DeleteCartsCommand extends Command
         return;
     }
 
+    /**
+     * @return \IntlDateFormatter|null
+     */
     protected function createIntlFormatter()
     {
         return \IntlDateFormatter::create(

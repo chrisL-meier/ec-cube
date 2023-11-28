@@ -25,10 +25,11 @@ use Eccube\Service\PurchaseFlow\PurchaseContext;
 class PaymentChargeChangeValidator extends ItemHolderPostValidator
 {
     /**
-     * @param ItemHolderInterface $itemHolder
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $itemHolder カート or 注文
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws InvalidItemException
+     * @throws InvalidItemException 手数料が変更されている場合
      */
     protected function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

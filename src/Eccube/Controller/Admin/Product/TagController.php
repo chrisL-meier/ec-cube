@@ -43,7 +43,7 @@ class TagController extends AbstractController
      *
      * @param Request $request
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array<string,mixed>|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function index(Request $request)
     {
@@ -125,6 +125,12 @@ class TagController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/tag/{id}/delete", requirements={"id" = "\d+"}, name="admin_product_tag_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param Tag $Tag
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function delete(Request $request, Tag $Tag)
     {
@@ -157,6 +163,10 @@ class TagController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/tag/sort_no/move", name="admin_product_tag_sort_no_move", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function moveSortNo(Request $request)
     {
@@ -175,6 +185,13 @@ class TagController extends AbstractController
         return new Response();
     }
 
+    /**
+     * @param Request $request
+     * @param FormInterface $form
+     * @param Tag $Tag
+     *
+     * @return void
+     */
     protected function dispatchComplete(Request $request, FormInterface $form, Tag $Tag)
     {
         $event = new EventArgs(

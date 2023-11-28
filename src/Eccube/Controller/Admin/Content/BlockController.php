@@ -53,6 +53,10 @@ class BlockController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/content/block", name="admin_content_block", methods={"GET"})
      * @Template("@admin/Content/block.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -80,6 +84,15 @@ class BlockController extends AbstractController
      * @Route("/%eccube_admin_route%/content/block/new", name="admin_content_block_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/content/block/{id}/edit", requirements={"id" = "\d+"}, name="admin_content_block_edit", methods={"GET", "POST"})
      * @Template("@admin/Content/block_edit.twig")
+     *
+     * @param Request $request
+     * @param Environment $twig
+     * @param Filesystem $fs
+     * @param CacheUtil $cacheUtil
+     * @param int|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException|\Twig\Error\LoaderError
      */
     public function edit(Request $request, Environment $twig, FileSystem $fs, CacheUtil $cacheUtil, $id = null)
     {
@@ -183,6 +196,8 @@ class BlockController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/content/block/{id}/delete", requirements={"id" = "\d+"}, name="admin_content_block_delete", methods={"DELETE"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function delete(Request $request, Block $Block, Filesystem $fs, CacheUtil $cacheUtil)
     {

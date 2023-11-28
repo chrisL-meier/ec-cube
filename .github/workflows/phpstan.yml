@@ -26,10 +26,10 @@ jobs:
     - name: Setup PHP
       uses: nanasess/setup-php@master
       with:
-        php-version: '7.4'
+        php-version: '8.1'
 
     - name: Initialize Composer
       uses: ./.github/actions/composer
 
     - name: PHPStan
-      run: vendor/bin/phpstan analyze src/ --error-format=github
+      run: vendor/bin/phpstan analyze src/ --level 6 --error-format=github

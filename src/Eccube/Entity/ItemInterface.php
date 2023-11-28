@@ -57,6 +57,9 @@ interface ItemInterface
      */
     public function isTax();
 
+    /**
+     * @return \Eccube\Entity\Master\OrderItemType|null
+     */
     public function getOrderItemType();
 
     /**
@@ -64,12 +67,31 @@ interface ItemInterface
      */
     public function getProductClass();
 
+    /**
+     * @return float|string|int|null
+     */
     public function getPrice();
 
+    /**
+     * @return float|string|int
+     */
     public function getQuantity();
 
+    /**
+     * @param int|float|string $quantity
+     *
+     * @return ItemInterface
+     */
     public function setQuantity($quantity);
+
+    /**
+     * @return int
+     */
     public function getId();
+
+    /**
+     * @return int|float|string
+     */
     public function getPointRate();
 
     /**

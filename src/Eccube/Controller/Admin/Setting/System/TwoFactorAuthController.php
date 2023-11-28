@@ -67,6 +67,10 @@ class TwoFactorAuthController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/two_factor_auth/auth", name="admin_two_factor_auth", methods={"GET", "POST"})
      * @Template("@admin/two_factor_auth.twig")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|array<string,mixed>
      */
     public function auth(Request $request)
     {
@@ -111,6 +115,10 @@ class TwoFactorAuthController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/two_factor_auth/set", name="admin_two_factor_auth_set", methods={"GET", "POST"})
      * @Template("@admin/two_factor_auth_set.twig")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
      */
     public function set(Request $request)
     {
@@ -127,6 +135,10 @@ class TwoFactorAuthController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/two_factor_auth/edit", name="admin_setting_system_two_factor_auth_edit", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/two_factor_auth_edit.twig")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
      */
     public function edit(Request $request)
     {
@@ -143,6 +155,11 @@ class TwoFactorAuthController extends AbstractController
         return $res;
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return array<string,mixed>|RedirectResponse
+     */
     private function createResponse(Request $request)
     {
         $error = null;

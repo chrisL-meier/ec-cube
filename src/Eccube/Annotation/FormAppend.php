@@ -38,7 +38,7 @@ final class FormAppend implements Annotation
     public $type;
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
     public $options;
 

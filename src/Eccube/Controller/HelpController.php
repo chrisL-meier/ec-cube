@@ -30,6 +30,8 @@ class HelpController extends AbstractController
      *
      * @Route("/guide", name="help_guide", methods={"GET"})
      * @Template("Help/guide.twig")
+     *
+     * @return array<empty>
      */
     public function guide()
     {
@@ -41,6 +43,8 @@ class HelpController extends AbstractController
      *
      * @Route("/help/about", name="help_about", methods={"GET"})
      * @Template("Help/about.twig")
+     *
+     * @return array<empty>
      */
     public function about()
     {
@@ -52,6 +56,8 @@ class HelpController extends AbstractController
      *
      * @Route("/help/privacy", name="help_privacy", methods={"GET"})
      * @Template("Help/privacy.twig")
+     *
+     * @return array<empty>
      */
     public function privacy()
     {
@@ -63,6 +69,8 @@ class HelpController extends AbstractController
      *
      * @Route("/help/agreement", name="help_agreement", methods={"GET"})
      * @Template("Help/agreement.twig")
+     *
+     * @return array<empty>
      */
     public function agreement()
     {

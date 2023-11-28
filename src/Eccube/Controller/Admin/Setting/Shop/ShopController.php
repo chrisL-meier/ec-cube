@@ -56,8 +56,10 @@ class ShopController extends AbstractController
      * @Template("@admin/Setting/Shop/shop_master.twig")
      *
      * @param Request $request
+     * @param CacheUtil $cacheUtil
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array<string,mixed>|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function index(Request $request, CacheUtil $cacheUtil)
     {

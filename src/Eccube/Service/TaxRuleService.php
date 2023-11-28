@@ -87,8 +87,8 @@ class TaxRuleService
     /**
      * 税金額を計算する
      *
-     * @param  int    $price     計算対象の金額
-     * @param  int    $taxRate   税率(%単位)
+     * @param  int|string|double    $price     計算対象の金額
+     * @param  int|string    $taxRate   税率(%単位)
      * @param  int    $RoundingType  端数処理
      * @param  int    $taxAdjust 調整額
      *
@@ -105,8 +105,8 @@ class TaxRuleService
     /**
      * 税込金額から税金額を計算する
      *
-     * @param  int    $price     計算対象の金額
-     * @param  int    $taxRate   税率(%単位)
+     * @param  int|string|double    $price     計算対象の金額
+     * @param  int|string    $taxRate   税率(%単位)
      * @param  int    $RoundingType  端数処理
      * @param  int    $taxAdjust 調整額
      *

@@ -35,6 +35,10 @@ class CartController extends AbstractController
     /**
      * @Route("/block/cart", name="block_cart", methods={"GET"})
      * @Route("/block/cart_sp", name="block_cart_sp", methods={"GET"})
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {

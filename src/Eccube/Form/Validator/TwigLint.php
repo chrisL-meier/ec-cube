@@ -20,5 +20,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class TwigLint extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'Invalid twig format. {{ error }}';
 }

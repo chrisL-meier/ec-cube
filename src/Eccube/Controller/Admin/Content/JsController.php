@@ -27,6 +27,9 @@ class JsController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/content/js", name="admin_content_js", methods={"GET", "POST"})
      * @Template("@admin/Content/js.twig")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,\Symfony\Component\Form\FormView>
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function index(Request $request)
     {

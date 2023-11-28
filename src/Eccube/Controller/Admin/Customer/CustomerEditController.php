@@ -68,6 +68,13 @@ class CustomerEditController extends AbstractController
      * @Route("/%eccube_admin_route%/customer/new", name="admin_customer_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/customer/{id}/edit", requirements={"id" = "\d+"}, name="admin_customer_edit", methods={"GET", "POST"})
      * @Template("@admin/Customer/edit.twig")
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function index(Request $request, PaginatorInterface $paginator, $id = null)
     {

@@ -39,9 +39,12 @@ class MailHistoryRepository extends AbstractRepository
     /**
      * @param \Eccube\Entity\Customer $Customer
      * @param integer $id
+     *
      * @return float|int|mixed|string
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
+     *
      * @expectedException \Exception|NoResultException|NonUniqueResultException
      */
     public function getByCustomerAndId(\Eccube\Entity\Customer $Customer, $id)

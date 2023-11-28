@@ -60,6 +60,11 @@ class CsvController extends AbstractController
      *     methods={"GET", "POST"}
      * )
      * @Template("@admin/Setting/Shop/csv.twig")
+     *
+     * @param Request $request
+     * @param CsvType $CsvType
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request, CsvType $CsvType)
     {

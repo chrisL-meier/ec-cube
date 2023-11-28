@@ -35,6 +35,9 @@ class ComposerRequireCommand extends Command
         $this->composerService = $composerService;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this->addArgument('package', InputArgument::REQUIRED)

@@ -28,7 +28,6 @@ use Eccube\Repository\BaseInfoRepository;
 use Eccube\Repository\MailHistoryRepository;
 use Eccube\Repository\MailTemplateRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -113,8 +112,14 @@ class MailService
     /**
      * Send customer confirm mail.
      *
-     * @param $Customer 会員情報
+     * @param Customer $Customer 会員情報
      * @param string $activateUrl アクティベート用url
+     *
+     * @return void
+     *
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendCustomerConfirmMail(Customer $Customer, $activateUrl)
     {
@@ -174,7 +179,11 @@ class MailService
     /**
      * Send customer complete mail.
      *
-     * @param $Customer 会員情報
+     * @param Customer $Customer 会員情報
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendCustomerCompleteMail(Customer $Customer)
     {
@@ -233,6 +242,10 @@ class MailService
      *
      * @param $Customer Customer
      * @param $email string
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendCustomerWithdrawMail(Customer $Customer, string $email)
     {
@@ -290,7 +303,11 @@ class MailService
     /**
      * Send contact mail.
      *
-     * @param $formData お問い合わせ内容
+     * @param array<string, string> $formData お問い合わせ内容
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendContactMail($formData)
     {
@@ -423,8 +440,12 @@ class MailService
     /**
      * Send admin customer confirm mail.
      *
-     * @param $Customer 会員情報
+     * @param Customer $Customer 会員情報
      * @param string $activateUrl アクティベート用url
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendAdminCustomerConfirmMail(Customer $Customer, $activateUrl)
     {
@@ -487,13 +508,10 @@ class MailService
      * Send admin order mail.
      *
      * @param Order $Order 受注情報
-     * @param $formData 入力内容
+     * @param array<string, string> $formData 入力内容
      *
      * @return Email
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function sendAdminOrderMail(Order $Order, $formData)
     {
@@ -532,8 +550,12 @@ class MailService
     /**
      * Send password reset notification mail.
      *
-     * @param $Customer 会員情報
+     * @param Customer $Customer 会員情報
      * @param string $reset_url
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendPasswordResetNotificationMail(Customer $Customer, $reset_url)
     {
@@ -594,8 +616,12 @@ class MailService
     /**
      * Send password reset notification mail.
      *
-     * @param $Customer 会員情報
+     * @param Customer $Customer 会員情報
      * @param string $password
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendPasswordResetCompleteMail(Customer $Customer, $password)
     {
@@ -657,6 +683,7 @@ class MailService
      * 発送通知メールは受注ごとに送られる
      *
      * @param Shipping $Shipping
+     * @return void
      *
      * @throws \Twig_Error
      */
@@ -725,7 +752,9 @@ class MailService
      */
     public function getShippingNotifyMailBody(Shipping $Shipping, Order $Order, $templateName = null, $is_html = false)
     {
-        $ShippingItems = array_filter($Shipping->getOrderItems()->toArray(), function (OrderItem $OrderItem) use ($Order) {
+        /** @var OrderItem[] $OrderItems */
+        $OrderItems = $Shipping->getOrderItems()->toArray();
+        $ShippingItems = array_filter($OrderItems, function (OrderItem $OrderItem) use ($Order) {
             return $OrderItem->getOrderId() === $Order->getId();
         });
 
@@ -753,10 +782,7 @@ class MailService
      * 会員情報変更時にメール通知
      *
      * @param Customer $Customer
-     * @param array $userData
-     *  - userAgent
-     *  - ipAddress
-     *  - preEmail
+     * @param array{userAgent: string, ipAddress: string, preEmail: string|null}|array{userAgent:string|null,ipAddress:string|null} $userData
      * @param string $eventName
      *
      * @return void

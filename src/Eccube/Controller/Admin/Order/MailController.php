@@ -71,6 +71,14 @@ class MailController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/order/{id}/mail", requirements={"id" = "\d+"}, name="admin_order_mail", methods={"GET", "POST"})
      * @Template("@admin/Order/mail.twig")
+     *
+     * @param Request $request
+     * @param Order $Order
+     *
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function index(Request $request, Order $Order)
     {
@@ -192,6 +200,11 @@ class MailController extends AbstractController
         ];
     }
 
+    /**
+     * @param Order $Order
+     * @param string $twig
+     * @return string
+     */
     private function createBody($Order, $twig = 'Mail/order.twig')
     {
         return $this->renderView($twig, [

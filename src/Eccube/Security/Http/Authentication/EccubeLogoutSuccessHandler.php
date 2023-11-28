@@ -24,6 +24,11 @@ class EccubeLogoutSuccessHandler extends DefaultLogoutSuccessHandler
     /** @var Context */
     protected $context;
 
+    /**
+     * @param HttpUtils $httpUtils
+     * @param Context $context
+     * @param string $targetUrl
+     */
     public function __construct(HttpUtils $httpUtils, Context $context, $targetUrl = '/')
     {
         parent::__construct($httpUtils, $targetUrl);

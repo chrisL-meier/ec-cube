@@ -63,6 +63,8 @@ class LogListener implements EventSubscriberInterface
 
     /**
      * @param RequestEvent $event
+     *
+     * @return void
      */
     public function onKernelRequestEarly(RequestEvent $event)
     {
@@ -75,6 +77,8 @@ class LogListener implements EventSubscriberInterface
 
     /**
      * @param RequestEvent $event
+     *
+     * @return void
      */
     public function onKernelRequest(RequestEvent $event)
     {
@@ -89,7 +93,7 @@ class LogListener implements EventSubscriberInterface
     /**
      * ルーティング名を取得する.
      *
-     * @param $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return string
      */
@@ -100,6 +104,8 @@ class LogListener implements EventSubscriberInterface
 
     /**
      * @param ControllerEvent $event
+     *
+     * @return void
      */
     public function onKernelController(ControllerEvent $event)
     {
@@ -139,6 +145,8 @@ class LogListener implements EventSubscriberInterface
 
     /**
      * @param ExceptionEvent $event
+     *
+     * @return void
      */
     public function onKernelException(ExceptionEvent $event)
     {

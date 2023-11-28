@@ -19,8 +19,10 @@ abstract class WhereCustomizer implements QueryCustomizer
 {
     /**
      * @param QueryBuilder $builder
-     * @param array $params
+     * @param array<string,mixed> $params
      * @param string $queryKey
+     *
+     * @return void
      */
     final public function customize(QueryBuilder $builder, $params, $queryKey)
     {
@@ -30,8 +32,8 @@ abstract class WhereCustomizer implements QueryCustomizer
     }
 
     /**
-     * @param array $params
-     * @param $queryKey
+     * @param array<string,mixed> $params
+     * @param string $queryKey
      *
      * @return WhereClause[]
      */

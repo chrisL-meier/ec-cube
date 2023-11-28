@@ -28,6 +28,11 @@ class HelpTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string,mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,6 +41,12 @@ class HelpTypeExtension extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormView $view
+     * @param FormInterface $form
+     * @param array<mixed> $options
+     *
+     * @return void
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -44,6 +55,11 @@ class HelpTypeExtension extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     *
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -52,6 +68,9 @@ class HelpTypeExtension extends AbstractTypeExtension
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getExtendedType()
     {
         return FormType::class;

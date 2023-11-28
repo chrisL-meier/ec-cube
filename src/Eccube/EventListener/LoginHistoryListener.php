@@ -68,7 +68,7 @@ class LoginHistoryListener implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * @return array<string,string>
      */
     public static function getSubscribedEvents()
     {
@@ -78,6 +78,10 @@ class LoginHistoryListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param InteractiveLoginEvent $event
+     * @return void
+     */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $request = $event->getRequest();

@@ -47,6 +47,10 @@ class CalendarController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/shop/calendar", name="admin_setting_shop_calendar", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/setting/shop/calendar/new", name="admin_setting_shop_calendar_new", methods={"GET", "POST"})
      * @Template("@admin/Setting/Shop/calendar.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -117,6 +121,12 @@ class CalendarController extends AbstractController
      * カレンダー設定の削除
      *
      * @Route("/%eccube_admin_route%/setting/shop/calendar/{id}/delete", requirements={"id" = "\d+"}, name="admin_setting_shop_calendar_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param Calendar $Calendar
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\NoResultException|\Doctrine\ORM\ORMException
      */
     public function delete(Request $request, Calendar $Calendar)
     {

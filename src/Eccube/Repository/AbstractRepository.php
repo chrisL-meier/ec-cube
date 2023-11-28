@@ -15,12 +15,16 @@ namespace Eccube\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Eccube\Entity\AbstractEntity;
-use Eccube\Common\EccubeConfig;
 
+/**
+ * ECCUBE AbstractRepository
+ *
+ * @extends ServiceEntityRepository<object>
+ */
 abstract class AbstractRepository extends ServiceEntityRepository
 {
     /**
-     * @var \Eccube\Common\EccubeConfig $eccubeConfig
+     * @var \Eccube\Common\EccubeConfig
      */
     protected $eccubeConfig;
 
@@ -28,6 +32,8 @@ abstract class AbstractRepository extends ServiceEntityRepository
      * エンティティを削除します。
      *
      * @param AbstractEntity $entity
+     *
+     * @return void
      */
     public function delete($entity)
     {
@@ -38,12 +44,17 @@ abstract class AbstractRepository extends ServiceEntityRepository
      * エンティティの登録/保存します。
      *
      * @param AbstractEntity $entity
+     *
+     * @return void
      */
     public function save($entity)
     {
         $this->getEntityManager()->persist($entity);
     }
 
+    /**
+     * @return int|string|null
+     */
     protected function getCacheLifetime()
     {
         if ($this->eccubeConfig !== null) {

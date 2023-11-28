@@ -13,6 +13,7 @@
 
 namespace Eccube\Controller\Mypage;
 
+use Cassandra\Custom;
 use Eccube\Controller\AbstractController;
 use Eccube\Entity\BaseInfo;
 use Eccube\Entity\CustomerAddress;
@@ -61,6 +62,10 @@ class DeliveryController extends AbstractController
      *
      * @Route("/mypage/delivery", name="mypage_delivery", methods={"GET"})
      * @Template("Mypage/delivery.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -77,6 +82,12 @@ class DeliveryController extends AbstractController
      * @Route("/mypage/delivery/new", name="mypage_delivery_new", methods={"GET", "POST"})
      * @Route("/mypage/delivery/{id}/edit", name="mypage_delivery_edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @Template("Mypage/delivery_edit.twig")
+     *
+     * @param Request $request
+     * @param string|int|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws \Exception
      */
     public function edit(Request $request, $id = null)
     {
@@ -176,6 +187,12 @@ class DeliveryController extends AbstractController
      * お届け先を削除する.
      *
      * @Route("/mypage/delivery/{id}/delete", name="mypage_delivery_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param CustomerAddress $CustomerAddress
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function delete(Request $request, CustomerAddress $CustomerAddress)
     {

@@ -44,6 +44,12 @@ class Step4Type extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return void
+     * @throws \Exception
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -130,6 +136,12 @@ class Step4Type extends AbstractType
         return 'install_step4';
     }
 
+    /**
+     * @param array<mixed> $data
+     * @param ExecutionContext $context
+     * @param mixed|null $param
+     * @return void
+     */
     public function validate($data, ExecutionContext $context, $param = null)
     {
         $parameters = $this->requestStack->getCurrentRequest()->get('install_step4');

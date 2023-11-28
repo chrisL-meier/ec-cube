@@ -41,6 +41,9 @@ class GenerateProxyCommand extends Command
         $this->container = $container;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this

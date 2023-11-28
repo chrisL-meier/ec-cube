@@ -26,10 +26,11 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
      */
     class OrderPdf extends AbstractEntity
     {
+        /** @var mixed */
         public $ids;
-
+        /** @var \DateTime|string */
         public $issue_date;
-
+        /** @var mixed */
         public $default;
 
         /**
@@ -119,7 +120,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
         }
 
         /**
-         * @param $member_id
+         * @param int $member_id
          *
          * @return $this
          */
@@ -199,7 +200,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
         }
 
         /**
-         * @param $message3|null
+         * @param string|null $message3
          *
          * @return $this
          */
@@ -279,7 +280,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
         }
 
         /**
-         * @param $create_date
+         * @param \DateTime|string $create_date
          *
          * @return $this
          */
@@ -299,7 +300,7 @@ if (!class_exists('\Eccube\Entity\OrderPdf')) {
         }
 
         /**
-         * @param $update_date
+         * @param \DateTime|string $update_date
          *
          * @return $this
          */

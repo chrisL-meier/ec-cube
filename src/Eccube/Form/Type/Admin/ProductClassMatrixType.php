@@ -30,6 +30,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class ProductClassMatrixType extends AbstractType
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -98,6 +105,13 @@ class ProductClassMatrixType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

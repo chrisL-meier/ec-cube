@@ -192,6 +192,12 @@ class OrderController extends AbstractController
      * @Route("/%eccube_admin_route%/order", name="admin_order", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/order/page/{page_no}", requirements={"page_no" = "\d+"}, name="admin_order_page", methods={"GET", "POST"})
      * @Template("@admin/Order/index.twig")
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param string|null $page_no
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -330,6 +336,10 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/order/bulk_delete", name="admin_order_bulk_delete", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
      */
     public function bulkDelete(Request $request)
     {
@@ -389,7 +399,7 @@ class OrderController extends AbstractController
 
     /**
      * @param Request $request
-     * @param $csvTypeId
+     * @param integer $csvTypeId
      * @param string $fileName
      *
      * @return StreamedResponse
@@ -625,7 +635,7 @@ class OrderController extends AbstractController
      *
      * @param Request $request
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      */
     public function exportPdf(Request $request)
     {

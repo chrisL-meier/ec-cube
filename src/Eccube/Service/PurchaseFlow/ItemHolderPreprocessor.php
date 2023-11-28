@@ -27,6 +27,7 @@ interface ItemHolderPreprocessor
      *
      * @param ItemHolderInterface $itemHolder
      * @param PurchaseContext     $context
+     * @return mixed
      */
     public function process(ItemHolderInterface $itemHolder, PurchaseContext $context);
 }

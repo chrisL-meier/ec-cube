@@ -63,7 +63,9 @@ class OwnerStoreController extends AbstractController
      * @var PluginApiService
      */
     protected $pluginApiService;
-
+    /**
+     * @var string
+     */
     private static $vendorName = 'ec-cube';
 
     /** @var BaseInfo */
@@ -84,7 +86,7 @@ class OwnerStoreController extends AbstractController
      * @param CacheUtil $cacheUtil
      *
      * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException|\Exception
      */
     public function __construct(
         PluginRepository $pluginRepository,
@@ -117,7 +119,7 @@ class OwnerStoreController extends AbstractController
      * @param int $page_no
      * @param PaginatorInterface $paginator
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      */
     public function search(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -220,8 +222,9 @@ class OwnerStoreController extends AbstractController
      * @Template("@admin/Store/plugin_confirm.twig")
      *
      * @param Request $request
+     * @param string|int $id
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      *
      * @throws \Eccube\Exception\PluginException
      */
@@ -455,7 +458,7 @@ class OwnerStoreController extends AbstractController
      *
      * @param Plugin $Plugin
      *
-     * @return array|RedirectResponse
+     * @return array<string,mixed>|RedirectResponse
      */
     public function doUpdateConfirm(Plugin $Plugin)
     {

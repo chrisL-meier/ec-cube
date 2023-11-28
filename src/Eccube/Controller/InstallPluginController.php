@@ -162,6 +162,8 @@ class InstallPluginController extends InstallController
     /**
      * トランザクションチェックファイルの有効期限を確認する
      *
+     * @param string $token
+     *
      * @return bool
      */
     public function isValidTransaction($token)
@@ -185,6 +187,13 @@ class InstallPluginController extends InstallController
      * sodium拡張がインストールされていない場合、WebApiプラグインをアンインストールする
      *
      * @Route("/install/plugin/check_api", name="install_plugin_check_api", methods={"PUT"})
+     *
+     * @param Request $request
+     * @param ComposerApiService $composerApiService
+     * @param EventDispatcherInterface $dispatcher
+     *
+     * @return JsonResponse
+     * @throws BadRequestHttpException|NotFoundHttpException
      */
     public function checkWebApiRequirements(Request $request, ComposerApiService $composerApiService, EventDispatcherInterface $dispatcher)
     {
@@ -217,6 +226,9 @@ class InstallPluginController extends InstallController
         return $this->json(['success' => true]);
     }
 
+    /**
+     * @return void
+     */
     private function clearCacheOnTerminate()
     {
         // KernelEvents::TERMINATE で強制的にキャッシュを削除する

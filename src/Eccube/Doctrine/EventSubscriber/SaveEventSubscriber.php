@@ -42,7 +42,7 @@ class SaveEventSubscriber implements EventSubscriber
     }
 
     /**
-     * @return array
+     * @return array<int,string>
      */
     public function getSubscribedEvents()
     {
@@ -54,6 +54,8 @@ class SaveEventSubscriber implements EventSubscriber
 
     /**
      * @param LifecycleEventArgs $args
+     *
+     * @return void
      */
     public function prePersist(LifecycleEventArgs $args)
     {
@@ -79,6 +81,8 @@ class SaveEventSubscriber implements EventSubscriber
 
     /**
      * @param LifecycleEventArgs $args
+     *
+     * @return void
      */
     public function preUpdate(LifecycleEventArgs $args)
     {

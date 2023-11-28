@@ -24,8 +24,10 @@ interface QueryCustomizer
      * クエリをカスタマイズします。
      *
      * @param QueryBuilder $builder
-     * @param array $params
+     * @param array<mixed> $params
      * @param string $queryKey
+     *
+     * @return void
      */
     public function customize(QueryBuilder $builder, $params, $queryKey);
 

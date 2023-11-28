@@ -45,6 +45,13 @@ class CustomerDeliveryEditController extends AbstractController
      * @Route("/%eccube_admin_route%/customer/{id}/delivery/new", name="admin_customer_delivery_new", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/customer/{id}/delivery/{did}/edit", name="admin_customer_delivery_edit", requirements={"id" = "\d+", "did" = "\d+"}, methods={"GET", "POST"})
      * @Template("@admin/Customer/delivery_edit.twig")
+     *
+     * @param Request $request
+     * @param Customer $Customer
+     * @param string|null $did
+     *
+     * @return array<string,mixed>|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws NotFoundHttpException
      */
     public function edit(Request $request, Customer $Customer, $did = null)
     {
@@ -122,6 +129,13 @@ class CustomerDeliveryEditController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/customer/{id}/delivery/{did}/delete", requirements={"id" = "\d+", "did" = "\d+"}, name="admin_customer_delivery_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param Customer $Customer
+     * @param string $did
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws NotFoundHttpException
      */
     public function delete(Request $request, Customer $Customer, $did)
     {

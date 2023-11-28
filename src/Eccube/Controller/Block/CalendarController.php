@@ -38,6 +38,10 @@ class CalendarController extends AbstractController
     /**
      * @Route("/block/calendar", name="block_calendar", methods={"GET"})
      * @Template("Block/calendar.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -83,11 +87,11 @@ class CalendarController extends AbstractController
     /**
      * カレンダー配列に定休日と今日フラグを設定します
      *
-     * @param array $targetMonthCalendar カレンダー配列
-     * @param array $holidayListOfTwoMonths 定休日リスト
+     * @param array<mixed> $targetMonthCalendar カレンダー配列
+     * @param array<mixed> $holidayListOfTwoMonths 定休日リスト
      * @param Carbon $targetDate ターゲット日
      *
-     * @return array カレンダーの配列
+     * @return array<int,array<string,string>> カレンダーの配列
      */
     private function setHolidayAndTodayFlag($targetMonthCalendar, $holidayListOfTwoMonths, Carbon $targetDate)
     {
@@ -126,7 +130,7 @@ class CalendarController extends AbstractController
      *
      * @param Carbon $firstDateOfTargetMonth 月初日
      *
-     * @return array カレンダーの配列
+     * @return array<int,array<string,string>> カレンダーの配列
      */
     private function createCalendar(Carbon $firstDateOfTargetMonth)
     {

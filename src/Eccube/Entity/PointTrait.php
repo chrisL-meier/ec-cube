@@ -34,7 +34,7 @@ trait PointTrait
     /**
      * Set addPoint
      *
-     * @param string $addPoint
+     * @param string|int|float $addPoint
      *
      * @return $this
      */
@@ -48,7 +48,7 @@ trait PointTrait
     /**
      * Get addPoint
      *
-     * @return int|string
+     * @return string|int|float
      */
     public function getAddPoint()
     {
@@ -58,7 +58,7 @@ trait PointTrait
     /**
      * Set usePoint
      *
-     * @param string $usePoint
+     * @param string|int|float $usePoint
      *
      * @return $this
      */

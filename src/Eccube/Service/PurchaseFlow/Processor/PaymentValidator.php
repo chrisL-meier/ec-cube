@@ -43,6 +43,12 @@ class PaymentValidator extends ItemHolderValidator
         $this->deliveryRepository = $deliveryRepository;
     }
 
+    /**
+     * @param ItemHolderInterface $itemHolder カート or 受注
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
+     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException 支払い方法が異なる場合
+     */
     protected function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {
         // 明細の個数が1以下の場合はOK
@@ -90,6 +96,10 @@ class PaymentValidator extends ItemHolderValidator
         }
     }
 
+    /**
+     * @param SaleType $SaleType
+     * @return array<int, Delivery>
+     */
     private function getDeliveries(SaleType $SaleType)
     {
         $Deliveries = $this->deliveryRepository->findBy(
@@ -105,7 +115,7 @@ class PaymentValidator extends ItemHolderValidator
     /**
      * @param Delivery[] $Deliveries
      *
-     * @return ArrayCollection|Payment[]
+     * @return ArrayCollection<int, Payment>
      */
     private function getPayments($Deliveries)
     {

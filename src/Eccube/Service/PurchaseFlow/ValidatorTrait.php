@@ -18,9 +18,10 @@ use Eccube\Entity\ProductClass;
 trait ValidatorTrait
 {
     /**
-     * @param ProductClass $ProductClass
-     * @param $errorCode
-     *
+     * @param string $errorCode
+     * @param ProductClass|null $ProductClass $ProductClass
+     * @param bool $warning
+     * @return void
      * @throws InvalidItemException
      */
     protected function throwInvalidItemException($errorCode, ProductClass $ProductClass = null, $warning = false)

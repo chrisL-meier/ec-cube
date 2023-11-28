@@ -181,6 +181,13 @@ class EditController extends AbstractController
      * @Route("/%eccube_admin_route%/order/new", name="admin_order_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/order/{id}/edit", requirements={"id" = "\d+"}, name="admin_order_edit", methods={"GET", "POST"})
      * @Template("@admin/Order/edit.twig")
+     *
+     * @param Request $request
+     * @param RouterInterface $router
+     * @param string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function index(Request $request, RouterInterface $router, $id = null)
     {
@@ -415,9 +422,11 @@ class EditController extends AbstractController
      * @Template("@admin/Order/search_customer.twig")
      *
      * @param Request $request
-     * @param integer $page_no
+     * @param PaginatorInterface $paginator
+     * @param string|null $page_no
      *
-     * @return array
+     * @return array<string,mixed>
+     * @throws BadRequestHttpException
      */
     public function searchCustomerHtml(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -574,6 +583,12 @@ class EditController extends AbstractController
      * @Route("/%eccube_admin_route%/order/search/product", name="admin_order_search_product", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/order/search/product/page/{page_no}", requirements={"page_no" = "\d+"}, name="admin_order_search_product_page", methods={"GET", "POST"})
      * @Template("@admin/Order/search_product.twig")
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param string|null $page_no
+     *
+     * @return array<string,mixed>|void
      */
     public function searchProduct(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -668,7 +683,8 @@ class EditController extends AbstractController
      *
      * @param Request $request
      *
-     * @return array
+     * @return array<string, array<int, array<string, OrderItemType|TaxType|null>>>
+     * @throws BadRequestHttpException
      */
     public function searchOrderItemType(Request $request)
     {

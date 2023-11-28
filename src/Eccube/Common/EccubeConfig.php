@@ -15,6 +15,9 @@ namespace Eccube\Common;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * @implements \ArrayAccess<string,mixed>
+ */
 class EccubeConfig implements \ArrayAccess
 {
     /**
@@ -28,7 +31,7 @@ class EccubeConfig implements \ArrayAccess
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -38,7 +41,7 @@ class EccubeConfig implements \ArrayAccess
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return bool
      */
@@ -48,8 +51,10 @@ class EccubeConfig implements \ArrayAccess
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return void
      */
     public function set($key, $value)
     {

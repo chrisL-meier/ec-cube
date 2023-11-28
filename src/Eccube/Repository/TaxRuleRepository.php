@@ -31,6 +31,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class TaxRuleRepository extends AbstractRepository
 {
+    /**
+     * @var array<string, \Eccube\Entity\TaxRule>
+     */
     private $rules = [];
 
     /**
@@ -248,7 +251,7 @@ class TaxRuleRepository extends AbstractRepository
     /**
      * getList
      *
-     * @return array|null
+     * @return array<int, mixed>|null
      */
     public function getList()
     {
@@ -266,6 +269,8 @@ class TaxRuleRepository extends AbstractRepository
      * 税規約の削除.
      *
      * @param  int|\Eccube\Entity\TaxRule $TaxRule 税規約
+     *
+     * @return void
      *
      * @throws NoResultException
      */
@@ -287,6 +292,8 @@ class TaxRuleRepository extends AbstractRepository
      *
      * getByRule() をコールすると、結果をキャッシュし、2回目以降はデータベースへアクセスしない.
      * このメソッドをコールすると、キャッシュをクリアし、再度データベースを参照して結果を取得する.
+     *
+     * @return void
      */
     public function clearCache()
     {

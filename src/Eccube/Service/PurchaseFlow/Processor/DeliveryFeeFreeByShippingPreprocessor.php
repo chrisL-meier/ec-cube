@@ -44,6 +44,7 @@ class DeliveryFeeFreeByShippingPreprocessor implements ItemHolderPreprocessor
     /**
      * @param ItemHolderInterface $itemHolder
      * @param PurchaseContext $context
+     * @return void
      */
     public function process(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {
@@ -76,6 +77,7 @@ class DeliveryFeeFreeByShippingPreprocessor implements ItemHolderPreprocessor
                     }
                 }
                 if ($isFree) {
+                    /** @var \Eccube\Entity\OrderItem $Item */
                     foreach ($Shipping->getOrderItems() as $Item) {
                         if ($Item->getProcessorName() == DeliveryFeePreprocessor::class) {
                             $Item->setQuantity(0);

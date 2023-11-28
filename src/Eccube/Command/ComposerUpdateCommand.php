@@ -33,6 +33,9 @@ class ComposerUpdateCommand extends Command
         $this->composerService = $composerService;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this->addOption('dry-run');

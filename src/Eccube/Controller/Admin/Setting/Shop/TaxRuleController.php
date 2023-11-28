@@ -58,6 +58,10 @@ class TaxRuleController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/shop/tax", name="admin_setting_shop_tax", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/setting/shop/tax/new", name="admin_setting_shop_tax_new", methods={"GET", "POST"})
      * @Template("@admin/Setting/Shop/tax_rule.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -151,6 +155,12 @@ class TaxRuleController extends AbstractController
      * 税率設定の削除
      *
      * @Route("/%eccube_admin_route%/setting/shop/tax/{id}/delete", requirements={"id" = "\d+"}, name="admin_setting_shop_tax_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param TaxRule $TaxRule
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\NoResultException
      */
     public function delete(Request $request, TaxRule $TaxRule)
     {

@@ -36,6 +36,9 @@ class LoadDataFixturesEccubeCommand extends DoctrineCommand
         $this->container = $container;
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this

@@ -36,10 +36,11 @@ class SaleLimitMultipleValidator extends ItemHolderValidator
     }
 
     /**
-     * @param ItemHolderInterface $itemHolder
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $itemHolder 商品
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException
+     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException 商品の購入数が在庫数を超えている場合
      */
     public function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

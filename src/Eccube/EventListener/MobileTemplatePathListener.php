@@ -50,6 +50,10 @@ class MobileTemplatePathListener implements EventSubscriberInterface
         $this->eccubeConfig = $eccubeConfig;
     }
 
+    /**
+     * @param RequestEvent $event
+     * @return void
+     */
     public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMainRequest()) {
@@ -83,6 +87,9 @@ class MobileTemplatePathListener implements EventSubscriberInterface
         $this->twig->setLoader($loader);
     }
 
+    /**
+     * @return array<string,array<mixed>>
+     */
     public static function getSubscribedEvents()
     {
         return [

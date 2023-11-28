@@ -127,6 +127,12 @@ class ShippingController extends AbstractController
      *
      * @Route("/%eccube_admin_route%/shipping/{id}/edit", requirements={"id" = "\d+"}, name="admin_shipping_edit", methods={"GET", "POST"})
      * @Template("@admin/Order/shipping.twig")
+     *
+     * @param Request $request
+     * @param Order $Order
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws \Exception
      */
     public function index(Request $request, Order $Order)
     {
@@ -263,7 +269,7 @@ class ShippingController extends AbstractController
                     log_error('出荷登録エラー', [$Order->getId(), $e]);
                     $this->addError('admin.flash.register_failed', 'admin');
                 }
-            } elseif ($request->get('mode') == 'register' && $form->getErrors(true)) {
+            } elseif ($request->get('mode') == 'register' && $flowResult->hasError()) {
                 $this->addError('admin.common.save_error', 'admin');
             }
         }

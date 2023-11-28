@@ -93,6 +93,10 @@ class WithdrawController extends AbstractController
      * @Route("/mypage/withdraw", name="mypage_withdraw", methods={"GET", "POST"})
      * @Route("/mypage/withdraw", name="mypage_withdraw_confirm", methods={"GET", "POST"})
      * @Template("Mypage/withdraw.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -173,6 +177,10 @@ class WithdrawController extends AbstractController
      *
      * @Route("/mypage/withdraw_complete", name="mypage_withdraw_complete", methods={"GET"})
      * @Template("Mypage/withdraw_complete.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<empty>
      */
     public function complete(Request $request)
     {

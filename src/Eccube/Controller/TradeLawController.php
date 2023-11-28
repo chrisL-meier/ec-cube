@@ -34,6 +34,8 @@ class TradeLawController extends AbstractController
     /**
      * @Route("/help/tradelaw", name="help_tradelaw", methods={"GET"})
      * @Template("Help/tradelaw.twig")
+     *
+     * @return array<string,mixed>
      */
     public function index()
     {

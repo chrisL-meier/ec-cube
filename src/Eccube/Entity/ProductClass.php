@@ -27,7 +27,9 @@ if (!class_exists('\Eccube\Entity\ProductClass')) {
      */
     class ProductClass extends \Eccube\Entity\AbstractEntity
     {
+        /** @var float|int|string|null  */
         private $price01_inc_tax = null;
+        /** @var float|int|string|null  */
         private $price02_inc_tax = null;
         /** @var float|int|string|bool */
         private $tax_rate = false;
@@ -88,6 +90,8 @@ if (!class_exists('\Eccube\Entity\ProductClass')) {
 
         /**
          * Set price02 IncTax
+         *
+         * @param string|float|int|null $price02_inc_tax
          *
          * @return ProductClass
          */

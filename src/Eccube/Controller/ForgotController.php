@@ -75,6 +75,10 @@ class ForgotController extends AbstractController
      *
      * @Route("/forgot", name="forgot", methods={"GET", "POST"})
      * @Template("Forgot/index.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -147,6 +151,11 @@ class ForgotController extends AbstractController
      *
      * @Route("/forgot/complete", name="forgot_complete", methods={"GET"})
      * @Template("Forgot/complete.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<empty>
+     * @throws HttpException\NotFoundHttpException
      */
     public function complete(Request $request)
     {
@@ -162,6 +171,12 @@ class ForgotController extends AbstractController
      *
      * @Route("/forgot/reset/{reset_key}", name="forgot_reset", methods={"GET", "POST"})
      * @Template("Forgot/reset.twig")
+     *
+     * @param Request $request
+     * @param string $reset_key
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws HttpException\NotFoundHttpException
      */
     public function reset(Request $request, $reset_key)
     {

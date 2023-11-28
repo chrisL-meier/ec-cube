@@ -55,6 +55,10 @@ class ContactController extends AbstractController
      * @Route("/contact", name="contact", methods={"GET", "POST"})
      * @Route("/contact", name="contact_confirm", methods={"GET", "POST"})
      * @Template("Contact/index.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -130,6 +134,8 @@ class ContactController extends AbstractController
      *
      * @Route("/contact/complete", name="contact_complete", methods={"GET"})
      * @Template("Contact/complete.twig")
+     *
+     * @return array<empty>
      */
     public function complete()
     {

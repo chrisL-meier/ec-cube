@@ -61,6 +61,14 @@ class CategoryController extends AbstractController
      * @Route("/%eccube_admin_route%/product/category/{parent_id}", requirements={"parent_id" = "\d+"}, name="admin_product_category_show", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/product/category/{id}/edit", requirements={"id" = "\d+"}, name="admin_product_category_edit", methods={"GET", "POST"})
      * @Template("@admin/Product/category.twig")
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     * @param string|null $parent_id
+     * @param string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException|BadRequestHttpException|\Exception
      */
     public function index(Request $request, CacheUtil $cacheUtil, $parent_id = null, $id = null)
     {
@@ -213,6 +221,13 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/category/{id}/delete", requirements={"id" = "\d+"}, name="admin_product_category_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     * @param string $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function delete(Request $request, $id, CacheUtil $cacheUtil)
     {
@@ -260,6 +275,12 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/category/sort_no/move", name="admin_product_category_sort_no_move", methods={"POST"})
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     *
+     * @return Response|void
+     * @throws BadRequestHttpException|\Exception
      */
     public function moveSortNo(Request $request, CacheUtil $cacheUtil)
     {

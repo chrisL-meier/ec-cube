@@ -13,15 +13,24 @@
 
 namespace Eccube\Twig;
 
+use Eccube\Common\EccubeConfig;
+use Eccube\Entity\BaseInfo;
+use Eccube\Entity\Layout;
+use Eccube\Entity\Page;
 use Eccube\Event\TemplateEvent;
+use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Twig\Source;
 
 class Template extends \Twig\Template
 {
     /**
      * {@inheritdoc}
+     * @param array<string, AppVariable|BaseInfo|EccubeConfig|TraceableEventDispatcher|Layout|Page|string|boolean> $context
+     * @param array<string, array<int, string|object>>  $blocks
      *
+     * @return void
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\SyntaxError
      */
@@ -53,12 +62,20 @@ class Template extends \Twig\Template
         return '';
     }
 
+    /**
+     * @return array<empty>
+     */
     public function getDebugInfo()
     {
         // Templateのキャッシュ作成時に動的に作成されるメソッド
         return [];
     }
 
+    /**
+     * @param array<mixed> $context
+     * @param array<mixed> $blocks
+     * @return void
+     */
     protected function doDisplay(array $context, array $blocks = [])
     {
         // Templateのキャッシュ作成時に動的に作成されるメソッド

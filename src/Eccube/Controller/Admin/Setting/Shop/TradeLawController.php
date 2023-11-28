@@ -43,6 +43,8 @@ class TradeLawController extends AbstractController
      * @Template("@admin/Setting/Shop/tradelaw.twig")
      *
      * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {

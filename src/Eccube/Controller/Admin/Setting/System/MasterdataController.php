@@ -29,6 +29,11 @@ class MasterdataController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/system/masterdata", name="admin_setting_system_masterdata", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/setting/system/masterdata/{entity}/edit", name="admin_setting_system_masterdata_view", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/masterdata.twig")
+     *
+     * @param Request $request
+     * @param class-string|null $entity
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response|array<string,mixed>
      */
     public function index(Request $request, $entity = null)
     {
@@ -68,6 +73,7 @@ class MasterdataController extends AbstractController
         } elseif (!is_null($entity)) {
             $form->submit(['masterdata' => $entity]);
             if ($form['masterdata']->isValid()) {
+                /** @var class-string $entityName */
                 $entityName = str_replace('-', '\\', $entity);
                 try {
                     $masterdata = $this->entityManager->getRepository($entityName)->findBy(
@@ -110,6 +116,10 @@ class MasterdataController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/system/masterdata/edit", name="admin_setting_system_masterdata_edit", methods={"GET", "POST"})
      * @Template("@admin/Setting/System/masterdata.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function edit(Request $request)
     {
@@ -130,7 +140,7 @@ class MasterdataController extends AbstractController
 
             if ($form2->isValid()) {
                 $data = $form2->getData();
-
+                /** @var class-string $entityName */
                 $entityName = str_replace('-', '\\', $data['masterdata_name']);
                 $sortNo = 0;
                 $ids = array_filter(array_map(

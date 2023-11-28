@@ -151,6 +151,12 @@ class ProductController extends AbstractController
      * @Route("/%eccube_admin_route%/product", name="admin_product", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/product/page/{page_no}", requirements={"page_no" = "\d+"}, name="admin_product_page", methods={"GET", "POST"})
      * @Template("@admin/Product/index.twig")
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param string|null $page_no
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request, PaginatorInterface $paginator, $page_no = null)
     {
@@ -287,6 +293,12 @@ class ProductController extends AbstractController
      * @Route("/%eccube_admin_route%/product/classes/{id}/load", name="admin_product_classes_load", methods={"GET"}, requirements={"id" = "\d+"}, methods={"GET"})
      * @Template("@admin/Product/product_class_popup.twig")
      * @ParamConverter("Product", options={"repository_method":"findWithSortedClassCategories"})
+     *
+     * @param Request $request
+     * @param Product $Product
+     *
+     * @return array<string,mixed>
+     * @throws BadRequestHttpException
      */
     public function loadProductClasses(Request $request, Product $Product)
     {
@@ -312,6 +324,11 @@ class ProductController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#process
      * @Route("/%eccube_admin_route%/product/product/image/process", name="admin_product_image_process", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws BadRequestHttpException|UnsupportedMediaTypeHttpException
      */
     public function imageProcess(Request $request)
     {
@@ -363,6 +380,11 @@ class ProductController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#load
      * @Route("/%eccube_admin_route%/product/product/image/load", name="admin_product_image_load", methods={"GET"})
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws BadRequestHttpException|NotFoundHttpException
      */
     public function imageLoad(Request $request)
     {
@@ -397,6 +419,11 @@ class ProductController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#revert
      * @Route("/%eccube_admin_route%/product/product/image/revert", name="admin_product_image_revert", methods={"DELETE"})
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws BadRequestHttpException|NotFoundHttpException
      */
     public function imageRevert(Request $request)
     {
@@ -419,6 +446,14 @@ class ProductController extends AbstractController
      * @Route("/%eccube_admin_route%/product/product/new", name="admin_product_product_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/product/product/{id}/edit", requirements={"id" = "\d+"}, name="admin_product_product_edit", methods={"GET", "POST"})
      * @Template("@admin/Product/product.twig")
+     *
+     * @param Request $request
+     * @param RouterInterface $router
+     * @param CacheUtil $cacheUtil
+     * @param int|string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException|\Exception
      */
     public function edit(Request $request, RouterInterface $router, CacheUtil $cacheUtil, $id = null)
     {
@@ -752,6 +787,13 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/product/{id}/delete", requirements={"id" = "\d+"}, name="admin_product_product_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     * @param int|string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \Exception
      */
     public function delete(Request $request, CacheUtil $cacheUtil, $id = null)
     {
@@ -848,6 +890,12 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/product/{id}/copy", requirements={"id" = "\d+"}, name="admin_product_product_copy", methods={"POST"})
+     *
+     * @param Request $request
+     * @param int|string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function copy(Request $request, $id = null)
     {
@@ -1081,6 +1129,7 @@ class ProductController extends AbstractController
      *
      * @param Request $request
      * @param ProductStatus $ProductStatus
+     * @param CacheUtil $cacheUtil
      *
      * @return RedirectResponse
      */

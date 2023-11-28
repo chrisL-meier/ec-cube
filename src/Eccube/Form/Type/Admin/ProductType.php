@@ -65,6 +65,11 @@ class ProductType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string,mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -198,8 +203,10 @@ class ProductType extends AbstractType
     /**
      * 指定された複数ディレクトリのうち、いずれかのディレクトリ以下にファイルが存在するかを確認。
      *
-     * @param $form FormInterface
-     * @param $dirs array
+     * @param FormInterface $form
+     * @param array<int,string> $dirs
+     *
+     * @return void
      */
     private function validateFilePath($form, $dirs)
     {
@@ -222,6 +229,10 @@ class ProductType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

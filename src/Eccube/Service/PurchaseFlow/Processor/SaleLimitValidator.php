@@ -24,10 +24,11 @@ use Eccube\Service\PurchaseFlow\PurchaseContext;
 class SaleLimitValidator extends ItemValidator
 {
     /**
-     * @param ItemInterface $item
-     * @param PurchaseContext $context
+     * @param ItemInterface $item 商品
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws InvalidItemException
+     * @throws InvalidItemException 販売制限数を超えている場合
      */
     protected function validate(ItemInterface $item, PurchaseContext $context)
     {
@@ -46,6 +47,11 @@ class SaleLimitValidator extends ItemValidator
         }
     }
 
+    /**
+     * @param ItemInterface $item 商品
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
+     */
     protected function handle(ItemInterface $item, PurchaseContext $context)
     {
         $limit = $item->getProductClass()->getSaleLimit();

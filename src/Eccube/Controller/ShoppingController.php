@@ -130,6 +130,10 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping", name="shopping", methods={"GET"})
      * @Template("Shopping/index.twig")
+     *
+     * @param PurchaseFlow $cartPurchaseFlow
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(PurchaseFlow $cartPurchaseFlow)
     {
@@ -211,6 +215,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/redirect_to", name="shopping_redirect_to", methods={"POST"})
      * @Template("Shopping/index.twig")
+     *
+     * @param Request $request
+     * @param RouterInterface $router
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function redirectTo(Request $request, RouterInterface $router)
     {
@@ -290,6 +299,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/confirm", name="shopping_confirm", methods={"POST"})
      * @Template("Shopping/confirm.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response|array<string,mixed>
+     * @throws TooManyRequestsHttpException
      */
     public function confirm(Request $request)
     {
@@ -398,6 +412,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/checkout", name="shopping_checkout", methods={"POST"})
      * @Template("Shopping/confirm.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>|\Symfony\Component\HttpFoundation\Response
+     * @throws TooManyRequestsHttpException
      */
     public function checkout(Request $request)
     {
@@ -525,6 +544,10 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/complete", name="shopping_complete", methods={"GET"})
      * @Template("Shopping/complete.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response|array<string,mixed>
      */
     public function complete(Request $request)
     {
@@ -574,6 +597,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/shipping/{id}", name="shopping_shipping", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @Template("Shopping/shipping.twig")
+     *
+     * @param Request $request
+     * @param Shipping $Shipping
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function shipping(Request $request, Shipping $Shipping)
     {
@@ -648,6 +676,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/shipping_edit/{id}", name="shopping_shipping_edit", requirements={"id" = "\d+"}, methods={"GET", "POST"})
      * @Template("Shopping/shipping_edit.twig")
+     *
+     * @param Request $request
+     * @param Shipping $Shipping
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function shippingEdit(Request $request, Shipping $Shipping)
     {
@@ -750,6 +783,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/login", name="shopping_login", methods={"GET"})
      * @Template("Shopping/login.twig")
+     *
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
@@ -789,6 +827,11 @@ class ShoppingController extends AbstractShoppingController
      *
      * @Route("/shopping/error", name="shopping_error", methods={"GET"})
      * @Template("Shopping/shopping_error.twig")
+     *
+     * @param Request $request
+     * @param PurchaseFlow $cartPurchaseFlow
+     *
+     * @return \Symfony\Component\HttpFoundation\Response|array<empty>
      */
     public function error(Request $request, PurchaseFlow $cartPurchaseFlow)
     {

@@ -59,6 +59,11 @@ class ComposerRequireAlreadyInstalledPluginsCommand extends Command
         $this->pluginRepository = $pluginRepository;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
     public function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);

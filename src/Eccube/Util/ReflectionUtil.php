@@ -15,6 +15,14 @@ namespace Eccube\Util;
 
 class ReflectionUtil
 {
+    /**
+     * @param object $instance
+     * @param string $property
+     * @param mixed $value
+     *
+     * @return void
+     * @throws \ReflectionException
+     */
     public static function setValue($instance, $property, $value)
     {
         $refObj = new \ReflectionObject($instance);
@@ -23,6 +31,12 @@ class ReflectionUtil
         $refProp->setValue($instance, $value);
     }
 
+    /**
+     * @param object $instance
+     * @param array<mixed> $values
+     * @return void
+     * @throws \ReflectionException
+     */
     public static function setValues($instance, array $values)
     {
         foreach ($values as $property => $value) {

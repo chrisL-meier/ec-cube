@@ -19,6 +19,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RoundingTypeType extends AbstractType
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -27,11 +34,17 @@ class RoundingTypeType extends AbstractType
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getParent()
     {
         return MasterType::class;
     }
 
+    /**
+     * @return string
+     */
     public function getBlockPrefix()
     {
         return 'rounding_type';

@@ -20,7 +20,6 @@ use Eccube\Entity\ProductStock;
 use Eccube\Repository\ProductClassRepository;
 use Eccube\Service\PurchaseFlow\ItemHolderValidator;
 use Eccube\Service\PurchaseFlow\PurchaseContext;
-use Eccube\Service\PurchaseFlow\PurchaseException;
 use Eccube\Service\PurchaseFlow\PurchaseProcessor;
 
 /**
@@ -46,6 +45,7 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
     /**
      * @param ItemHolderInterface $itemHolder
      * @param PurchaseContext $context
+     * @return void
      *
      * @throws \Eccube\Service\PurchaseFlow\InvalidItemException
      */
@@ -96,6 +96,12 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
         }
     }
 
+    /**
+     * @param ItemHolderInterface $From
+     * @param ItemHolderInterface $To
+     *
+     * @return array<int, int> 商品クラスIDをキーとした商品の数量の差分
+     */
     protected function getDiffOfQuantities(ItemHolderInterface $From, ItemHolderInterface $To)
     {
         $FromItems = $this->getQuantityByProductClass($From);
@@ -123,6 +129,11 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
         return $diff;
     }
 
+    /**
+     * @param ItemHolderInterface $ItemHolder 受注 or カート
+     *
+     * @return array<int, int> 商品クラスIDをキーとした商品の数量
+     */
     protected function getQuantityByProductClass(ItemHolderInterface $ItemHolder)
     {
         $ItemsByProductClass = [];
@@ -143,10 +154,10 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
     /**
      * 受注の仮確定処理を行います。
      *
-     * @param ItemHolderInterface $target
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $target 受注 or カート
+     * @param PurchaseContext $context 購入フローのコンテキスト
      *
-     * @throws PurchaseException
+     * @return void
      */
     public function prepare(ItemHolderInterface $target, PurchaseContext $context)
     {
@@ -178,10 +189,10 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
     /**
      * 受注の確定処理を行います。
      *
-     * @param ItemHolderInterface $target
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $target 受注 or カート
+     * @param PurchaseContext $context 購入フローのコンテキスト
      *
-     * @throws PurchaseException
+     * @return void
      */
     public function commit(ItemHolderInterface $target, PurchaseContext $context)
     {
@@ -192,8 +203,10 @@ class StockDiffProcessor extends ItemHolderValidator implements PurchaseProcesso
     /**
      * 仮確定した受注データの取り消し処理を行います。
      *
-     * @param ItemHolderInterface $itemHolder
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $itemHolder 受注 or カート
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     *
+     * @return void
      */
     public function rollback(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

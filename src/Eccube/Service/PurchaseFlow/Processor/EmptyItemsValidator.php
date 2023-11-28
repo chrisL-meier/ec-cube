@@ -39,10 +39,11 @@ class EmptyItemsValidator extends ItemHolderValidator
     }
 
     /**
-     * @param ItemHolderInterface $itemHolder
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $itemHolder カート or 注文
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws InvalidItemException
+     * @throws InvalidItemException 商品明細がない場合
      */
     protected function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

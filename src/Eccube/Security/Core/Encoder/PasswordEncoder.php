@@ -43,7 +43,9 @@ class PasswordEncoder implements PasswordEncoderInterface
     /**
      * Set Auth Magic.
      *
-     * @param $authMagic
+     * @param string $authMagic
+     *
+     * @return void
      */
     public function setAuthMagic($authMagic)
     {

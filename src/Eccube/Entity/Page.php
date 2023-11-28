@@ -39,6 +39,9 @@ if (!class_exists('\Eccube\Entity\Page')) {
         // ご利用規約ページID
         public const AGREEMENT_PAGE_ID = 19;
 
+        /**
+         * @return array|\Eccube\Entity\Layout[]
+         */
         public function getLayouts()
         {
             $Layouts = [];
@@ -162,6 +165,8 @@ if (!class_exists('\Eccube\Entity\Page')) {
 
         /**
          * Set id
+         *
+         * @param int $id
          *
          * @return Page
          */
@@ -507,7 +512,7 @@ if (!class_exists('\Eccube\Entity\Page')) {
         }
 
         /**
-         * @param $layoutId
+         * @param int $layoutId
          *
          * @return int|null
          */

@@ -105,7 +105,7 @@ class StringUtil
     /**
      * 改行コードの変換
      *
-     * @param $value
+     * @param string|null $value
      * @param string $lf
      *
      * @return string
@@ -123,6 +123,7 @@ class StringUtil
      * 文字コードの判定
      *
      * @param string $value
+     * @param string[] $encoding
      *
      * @return string|null
      */
@@ -159,7 +160,7 @@ class StringUtil
     /**
      * 現在からの経過時間を書式化する.
      *
-     * @param $date
+     * @param \DateTimeInterface|string|null $date
      *
      * @return string
      */
@@ -280,7 +281,8 @@ class StringUtil
     }
 
     /**
-     * @param $value
+     * @param mixed $value
+     * @param bool $greedy
      *
      * @return bool
      */
@@ -292,7 +294,7 @@ class StringUtil
     /**
      * 両端にある全角スペース、半角スペースを取り除く
      *
-     * @param $value
+     * @param mixed $value
      *
      * @return string|int|null
      */
@@ -315,7 +317,7 @@ class StringUtil
      * envファイルのコンテンツを更新または追加する.
      *
      * @param string $env
-     * @param array $replacement
+     * @param array<mixed> $replacement
      *
      * @return string
      */

@@ -110,13 +110,21 @@ class CsvImportController extends AbstractCsvImportController
      * @var ValidatorInterface
      */
     protected $validator;
-
+    /**
+     * @var array<int,mixed>
+     */
     private $errors = [];
-
+    /**
+     * @var bool
+     */
     protected $isSplitCsv = false;
-
+    /**
+     * @var int
+     */
     protected $csvFileNo = 1;
-
+    /**
+     * @var int
+     */
     protected $currentLineNo = 1;
 
     /**
@@ -168,10 +176,9 @@ class CsvImportController extends AbstractCsvImportController
      * @Route("/%eccube_admin_route%/product/product_csv_upload", name="admin_product_csv_import", methods={"GET", "POST"})
      * @Template("@admin/Product/csv_product.twig")
      *
-     * @return array
+     * @return array<mixed>|\Symfony\Component\HttpFoundation\JsonResponse
      *
-     * @throws \Doctrine\DBAL\ConnectionException
-     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\DBAL\ConnectionException|\Doctrine\ORM\NoResultException|\Doctrine\DBAL\Exception
      */
     public function csvProduct(Request $request, CacheUtil $cacheUtil)
     {
@@ -690,6 +697,12 @@ class CsvImportController extends AbstractCsvImportController
      *
      * @Route("/%eccube_admin_route%/product/category_csv_upload", name="admin_product_category_csv_import", methods={"GET", "POST"})
      * @Template("@admin/Product/csv_category.twig")
+     *
+     * @param Request $request
+     * @param CacheUtil $cacheUtil
+     *
+     * @return array<mixed>|\Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \Doctrine\DBAL\ConnectionException|\Doctrine\DBAL\Exception\DriverException|\Doctrine\DBAL\Exception
      */
     public function csvCategory(Request $request, CacheUtil $cacheUtil)
     {
@@ -852,9 +865,11 @@ class CsvImportController extends AbstractCsvImportController
      *
      * @Route("/%eccube_admin_route%/product/csv_template/{type}", requirements={"type" = "\w+"}, name="admin_product_csv_template", methods={"GET"})
      *
-     * @param $type
+     * @param Request $request
+     * @param string $type
      *
      * @return StreamedResponse
+     * @throws NotFoundHttpException
      */
     public function csvTemplate(Request $request, $type)
     {
@@ -875,12 +890,12 @@ class CsvImportController extends AbstractCsvImportController
      * 登録、更新時のエラー画面表示
      *
      * @param FormInterface $form
-     * @param array $headers
+     * @param array<string, array<string, mixed>> $headers
      * @param bool $rollback
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse|array<string,mixed>
      *
-     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Doctrine\DBAL\ConnectionException|\Doctrine\DBAL\Exception
      */
     protected function renderWithError($form, $headers, $rollback = true)
     {
@@ -914,10 +929,12 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * 商品画像の削除、登録
      *
-     * @param $row
+     * @param array<string,string> $row
      * @param Product $Product
-     * @param CsvImportService $data
-     * @param $headerByKey
+     * @param CsvImportService<int,mixed> $data
+     * @param array<mixed> $headerByKey
+     *
+     * @return void
      */
     protected function createProductImage($row, Product $Product, $data, $headerByKey)
     {
@@ -965,10 +982,12 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * 商品カテゴリの削除、登録
      *
-     * @param $row
+     * @param array<string,string> $row
      * @param Product $Product
-     * @param CsvImportService $data
-     * @param $headerByKey
+     * @param CsvImportService<int,mixed> $data
+     * @param array<mixed> $headerByKey
+     *
+     * @return void
      */
     protected function createProductCategory($row, Product $Product, $data, $headerByKey)
     {
@@ -1033,9 +1052,12 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * タグの登録
      *
-     * @param array $row
+     * @param array<string,string> $row
      * @param Product $Product
-     * @param CsvImportService $data
+     * @param CsvImportService<int,mixed> $data
+     * @param array<mixed> $headerByKey
+     *
+     * @return void
      */
     protected function createProductTag($row, Product $Product, $data, $headerByKey)
     {
@@ -1083,10 +1105,10 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * 商品規格分類1、商品規格分類2がnullとなる商品規格情報を作成
      *
-     * @param $row
+     * @param array<mixed> $row
      * @param Product $Product
-     * @param CsvImportService $data
-     * @param $headerByKey
+     * @param CsvImportService<int,mixed> $data
+     * @param array<mixed> $headerByKey
      * @param null $ClassCategory1
      * @param null $ClassCategory2
      *
@@ -1240,10 +1262,11 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * 商品規格情報を更新
      *
-     * @param $row
+     * @param array<mixed> $row
      * @param Product $Product
      * @param ProductClass $ProductClass
-     * @param CsvImportService $data
+     * @param CsvImportService<int,mixed> $data
+     * @param array<mixed> $headerByKey
      *
      * @return ProductClass
      */
@@ -1419,6 +1442,10 @@ class CsvImportController extends AbstractCsvImportController
 
     /**
      * 登録、更新時のエラー画面表示
+     *
+     * @param string $message
+     *
+     * @return void
      */
     protected function addErrors($message)
     {
@@ -1426,7 +1453,7 @@ class CsvImportController extends AbstractCsvImportController
     }
 
     /**
-     * @return array
+     * @return array<int,string>
      */
     protected function getErrors()
     {
@@ -1444,7 +1471,7 @@ class CsvImportController extends AbstractCsvImportController
     /**
      * 商品登録CSVヘッダー定義
      *
-     * @return array
+     * @return array<string,array<string,mixed>>
      */
     protected function getProductCsvHeader()
     {
@@ -1579,6 +1606,8 @@ class CsvImportController extends AbstractCsvImportController
 
     /**
      * カテゴリCSVヘッダー定義
+     *
+     * @return array<string,array<string,mixed>>
      */
     protected function getCategoryCsvHeader()
     {
@@ -1763,6 +1792,9 @@ class CsvImportController extends AbstractCsvImportController
         return $this->json(['success' => true]);
     }
 
+    /**
+     * @return array<mixed>
+     */
     protected function getCsvTempFiles()
     {
         $files = Finder::create()
@@ -1778,6 +1810,10 @@ class CsvImportController extends AbstractCsvImportController
         return $choices;
     }
 
+    /**
+     * @param int $currentLineNo
+     * @return float|int
+     */
     protected function convertLineNo($currentLineNo)
     {
         if ($this->isSplitCsv) {

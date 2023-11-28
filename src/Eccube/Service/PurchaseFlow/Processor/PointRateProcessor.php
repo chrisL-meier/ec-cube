@@ -35,6 +35,12 @@ class PointRateProcessor extends ItemHolderPostValidator
         $this->baseInfoRepository = $baseInfoRepository;
     }
 
+    /**
+     * @param ItemHolderInterface $itemHolder 注文 or カート
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
+     * @throws \Exception
+     */
     protected function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {
         if (!$itemHolder instanceof Order) {

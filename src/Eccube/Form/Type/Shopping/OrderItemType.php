@@ -25,11 +25,23 @@ class OrderItemType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
@@ -39,6 +51,9 @@ class OrderItemType extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getBlockPrefix()
     {
         return '_shopping_order_item';

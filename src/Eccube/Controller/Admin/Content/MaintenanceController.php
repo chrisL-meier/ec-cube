@@ -38,6 +38,10 @@ class MaintenanceController extends AbstractController
      *
      * @Route("/%eccube_admin_route%/content/maintenance", name="admin_content_maintenance", methods={"GET", "POST"})
      * @Template("@admin/Content/maintenance.twig")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -79,6 +83,13 @@ class MaintenanceController extends AbstractController
      * 権限管理設定でアクセス不可になるのを避けるため、ルーティングは/admin/disable_maintenanceで設定しています
      *
      * @Route("/%eccube_admin_route%/disable_maintenance/{mode}", requirements={"mode": "manual|auto_maintenance|auto_maintenance_update"}, name="admin_disable_maintenance", methods={"POST"})
+     *
+     * @param Request $request
+     * @param string $mode
+     * @param SystemService $systemService
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws BadRequestHttpException
      */
     public function disableMaintenance(Request $request, $mode, SystemService $systemService)
     {

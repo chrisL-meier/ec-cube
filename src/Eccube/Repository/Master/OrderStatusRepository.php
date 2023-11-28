@@ -42,12 +42,12 @@ class OrderStatusRepository extends AbstractRepository
      *
      * TODO Abstract メソッドにしたい
      *
-     * @param array $criteria
-     * @param array $orderBy
+     * @param array<string, mixed> $criteria
+     * @param array<string|int, string> $orderBy
      * @param integer $limit
      * @param integer $offset
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      *
      * @see EntityRepository::findBy()
      */
@@ -83,7 +83,7 @@ class OrderStatusRepository extends AbstractRepository
     /**
      * find All Array
      *
-     * @return array
+     * @return array<int, array<int, mixed>>
      */
     public function findAllArray()
     {

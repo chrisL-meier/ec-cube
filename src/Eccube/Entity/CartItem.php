@@ -200,6 +200,9 @@ if (!class_exists('\Eccube\Entity\CartItem')) {
             return false;
         }
 
+        /**
+         * @return Master\OrderItemType
+         */
         public function getOrderItemType()
         {
             // TODO OrderItemType::PRODUCT
@@ -238,6 +241,9 @@ if (!class_exists('\Eccube\Entity\CartItem')) {
             return $this->product_class_id;
         }
 
+        /**
+         * @return float|int|string
+         */
         public function getPriceIncTax()
         {
             // TODO ItemInterfaceに追加, Cart::priceは税込み金額が入っているので,フィールドを分ける必要がある
@@ -254,6 +260,8 @@ if (!class_exists('\Eccube\Entity\CartItem')) {
 
         /**
          * @param Cart $Cart
+         *
+         * @return $this
          */
         public function setCart(Cart $Cart)
         {

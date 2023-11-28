@@ -72,6 +72,8 @@ if (!class_exists('\Eccube\Entity\Order')) {
         /**
          * 課税対象の明細の合計金額を返す.
          * 商品合計 + 送料 + 手数料 + 値引き(課税).
+         *
+         * @return int|float
          */
         public function getTaxableTotal()
         {
@@ -87,7 +89,7 @@ if (!class_exists('\Eccube\Entity\Order')) {
         /**
          * 課税対象の明細の合計金額を、税率ごとに集計する.
          *
-         * @return array
+         * @return array<int|string,int|float>
          */
         public function getTaxableTotalByTaxRate()
         {
@@ -157,10 +159,11 @@ if (!class_exists('\Eccube\Entity\Order')) {
         /**
          * 課税対象の値引き明細を返す.
          *
-         * @return array
+         * @return array<int, OrderItem>
          */
         public function getTaxableDiscountItems()
         {
+            /** @var OrderItem[] $items */
             $items = (new ItemCollection($this->getTaxableItems()))->sort()->toArray();
             return array_filter($items, function (OrderItem $Item) {
                 return $Item->isDiscount();
@@ -182,10 +185,11 @@ if (!class_exists('\Eccube\Entity\Order')) {
         /**
          * 非課税・不課税の値引き明細を返す.
          *
-         * @return array
+         * @return array<int,OrderItem>
          */
         public function getTaxFreeDiscountItems()
         {
+            /** @var OrderItem[] $items */
             $items = (new ItemCollection($this->getOrderItems()))->sort()->toArray();
             return array_filter($items, function (OrderItem $Item) {
                 return $Item->isPoint() || ($Item->isDiscount() && $Item->getTaxType()->getId() != TaxType::TAXATION);
@@ -1609,7 +1613,7 @@ if (!class_exists('\Eccube\Entity\Order')) {
         /**
          * Get mailHistories.
          *
-         * @return \Doctrine\Common\Collections\Collection
+         * @return \Doctrine\Common\Collections\Collection<int,MailHistory>
          */
         public function getMailHistories()
         {
@@ -1635,7 +1639,7 @@ if (!class_exists('\Eccube\Entity\Order')) {
          *
          * @return \Eccube\Entity\Customer|null
          */
-        public function getCustomer()
+        public function getCustomer(): ?Customer
         {
             return $this->Customer;
         }

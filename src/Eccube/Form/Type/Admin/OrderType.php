@@ -87,6 +87,11 @@ class OrderType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -252,6 +257,10 @@ class OrderType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -272,6 +281,8 @@ class OrderType extends AbstractType
      * 受注明細をソートする.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function sortOrderItems(FormEvent $event)
     {
@@ -293,6 +304,8 @@ class OrderType extends AbstractType
      * ステータスのプルダウンは, ステートマシンで遷移可能なステータスのみ表示する.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function addOrderStatusForm(FormEvent $event)
     {
@@ -336,6 +349,8 @@ class OrderType extends AbstractType
      * 複数配送時はShippingの編集は行わない.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function addShippingForm(FormEvent $event)
     {
@@ -363,6 +378,8 @@ class OrderType extends AbstractType
      * - 受注ステータス(新規登録時)
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function copyFields(FormEvent $event)
     {
@@ -399,6 +416,8 @@ class OrderType extends AbstractType
      * 受注ステータスのバリデーションを行う.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function validateOrderStatus(FormEvent $event)
     {
@@ -434,6 +453,8 @@ class OrderType extends AbstractType
      * 商品明細が1件も登録されていない場合はエラーとする.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function validateOrderItems(FormEvent $event)
     {
@@ -459,6 +480,8 @@ class OrderType extends AbstractType
      * 受注明細と, Order/Shippingの紐付けを行う.
      *
      * @param FormEvent $event
+     *
+     * @return void
      */
     public function associateOrderAndShipping(FormEvent $event)
     {

@@ -14,6 +14,7 @@
 namespace Eccube\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
@@ -91,6 +92,9 @@ class CustomerRepository extends AbstractRepository
         $this->eccubeConfig = $eccubeConfig;
     }
 
+    /**
+     * @return Customer
+     */
     public function newCustomer()
     {
         $CustomerStatus = $this->getEntityManager()
@@ -104,10 +108,10 @@ class CustomerRepository extends AbstractRepository
     }
 
     /**
-     * @param array{
+     * @param array<mixed>|array{
      *         multi?:string,
      *         pref?:Pref,
-     *         sex?:Sex[]|ArrayCollection,
+     *         sex?:Sex[]|ArrayCollection<mixed>,
      *         birth_month?:string|int,
      *         birth_start?:\DateTime,
      *         birth_end?:\DateTime,
@@ -128,12 +132,13 @@ class CustomerRepository extends AbstractRepository
      *         last_buy_datetime_end?:\DateTime,
      *         last_buy_start?:\DateTime,
      *         last_buy_end?:\DateTime,
-     *         customer_status?:CustomerStatus[]|ArrayCollection,
+     *         customer_status?:CustomerStatus[]|ArrayCollection<mixed>,
      *         buy_product_name?:string,
      *         sortkey?:string,
      *         sorttype?:string
      *     } $searchData
      * @return QueryBuilder
+     * @throws Exception
      */
     public function getQueryBuilderBySearchData($searchData)
     {
@@ -232,7 +237,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.create_date >= :create_date_start')
                 ->setParameter('create_date_start', $date);
-        } elseif (!empty($searchData['create_date_start']) && $searchData['create_date_start']) {
+        } elseif (!empty($searchData['create_date_start'])) {
             $qb
                 ->andWhere('c.create_date >= :create_date_start')
                 ->setParameter('create_date_start', $searchData['create_date_start']);
@@ -243,7 +248,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.create_date < :create_date_end')
                 ->setParameter('create_date_end', $date);
-        } elseif (!empty($searchData['create_date_end']) && $searchData['create_date_end']) {
+        } elseif (!empty($searchData['create_date_end'])) {
             $date = clone $searchData['create_date_end'];
             $date->modify('+1 days');
             $qb
@@ -257,7 +262,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.update_date >= :update_date_start')
                 ->setParameter('update_date_start', $date);
-        } elseif (!empty($searchData['update_date_start']) && $searchData['update_date_start']) {
+        } elseif (!empty($searchData['update_date_start'])) {
             $qb
                 ->andWhere('c.update_date >= :update_date_start')
                 ->setParameter('update_date_start', $searchData['update_date_start']);
@@ -268,7 +273,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.update_date < :update_date_end')
                 ->setParameter('update_date_end', $date);
-        } elseif (!empty($searchData['update_date_end']) && $searchData['update_date_end']) {
+        } elseif (!empty($searchData['update_date_end'])) {
             $date = clone $searchData['update_date_end'];
             $date->modify('+1 days');
             $qb
@@ -282,7 +287,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.last_buy_date >= :last_buy_start')
                 ->setParameter('last_buy_start', $date);
-        } elseif (!empty($searchData['last_buy_start']) && $searchData['last_buy_start']) {
+        } elseif (!empty($searchData['last_buy_start'])) {
             $qb
                 ->andWhere('c.last_buy_date >= :last_buy_start')
                 ->setParameter('last_buy_start', $searchData['last_buy_start']);
@@ -293,7 +298,7 @@ class CustomerRepository extends AbstractRepository
             $qb
                 ->andWhere('c.last_buy_date < :last_buy_end')
                 ->setParameter('last_buy_end', $date);
-        } elseif (!empty($searchData['last_buy_end']) && $searchData['last_buy_end']) {
+        } elseif (!empty($searchData['last_buy_end'])) {
             $date = clone $searchData['last_buy_end'];
             $date->modify('+1 days');
             $qb
@@ -366,7 +371,7 @@ class CustomerRepository extends AbstractRepository
     /**
      * 仮会員をシークレットキーで検索する.
      *
-     * @param $secretKey
+     * @param string $secretKey
      *
      * @return Customer|null 見つからない場合はnullを返す.
      */
@@ -381,7 +386,7 @@ class CustomerRepository extends AbstractRepository
     /**
      * 本会員をemailで検索する.
      *
-     * @param $email
+     * @param string $email
      *
      * @return Customer|null 見つからない場合はnullを返す.
      */
@@ -396,8 +401,8 @@ class CustomerRepository extends AbstractRepository
     /**
      * 本会員をリセットキー、またはリセットキーとメールアドレスで検索する.
      *
-     * @param $resetKey
-     * @param $email
+     * @param string $resetKey
+     * @param string|null $email
      *
      * @return Customer|null 見つからない場合はnullを返す.
      */
@@ -434,9 +439,9 @@ class CustomerRepository extends AbstractRepository
      * 仮会員, 本会員の会員を返す.
      * Eccube\Entity\CustomerのUniqueEntityバリデーションで使用しています.
      *
-     * @param array $criteria
+     * @param array<string, mixed> $criteria
      *
-     * @return Customer[]
+     * @return array<int, Customer>
      */
     public function getNonWithdrawingCustomers(array $criteria = [])
     {

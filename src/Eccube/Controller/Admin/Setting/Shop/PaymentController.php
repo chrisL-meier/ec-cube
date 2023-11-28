@@ -53,6 +53,10 @@ class PaymentController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/setting/shop/payment", name="admin_setting_shop_payment", methods={"GET"})
      * @Template("@admin/Setting/Shop/payment.twig")
+     *
+     * @param Request $request
+     *
+     * @return array<string,mixed>
      */
     public function index(Request $request)
     {
@@ -79,6 +83,11 @@ class PaymentController extends AbstractController
      * @Route("/%eccube_admin_route%/setting/shop/payment/new", name="admin_setting_shop_payment_new", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/setting/shop/payment/{id}/edit", requirements={"id" = "\d+"}, name="admin_setting_shop_payment_edit", methods={"GET", "POST"})
      * @Template("@admin/Setting/Shop/payment_edit.twig")
+     *
+     * @param Request $request
+     * @param Payment|null $Payment
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function edit(Request $request, Payment $Payment = null)
     {
@@ -164,6 +173,11 @@ class PaymentController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#process
      * @Route("/%eccube_admin_route%/setting/shop/payment/image/process", name="admin_payment_image_process", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws BadRequestHttpException|UnsupportedMediaTypeHttpException
      */
     public function imageProcess(Request $request)
     {
@@ -212,6 +226,11 @@ class PaymentController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#load
      * @Route("/%eccube_admin_route%/setting/shop/payment/image/load", name="admin_payment_image_load", methods={"GET"})
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws BadRequestHttpException|NotFoundHttpException
      */
     public function imageLoad(Request $request)
     {
@@ -243,6 +262,11 @@ class PaymentController extends AbstractController
      *
      * @see https://pqina.nl/filepond/docs/api/server/#revert
      * @Route("/%eccube_admin_route%/setting/shop/payment/image/revert", name="admin_payment_image_revert", methods={"DELETE"})
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws BadRequestHttpException|NotFoundHttpException
      */
     public function imageRevert(Request $request)
     {
@@ -304,6 +328,10 @@ class PaymentController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/setting/shop/payment/{id}/visible", requirements={"id" = "\d+"}, name="admin_setting_shop_payment_visible", methods={"PUT"})
+     *
+     * @param Payment $Payment
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function visible(Payment $Payment)
     {
@@ -328,6 +356,7 @@ class PaymentController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws BadRequestHttpException
      */
     public function moveSortNo(Request $request)
     {

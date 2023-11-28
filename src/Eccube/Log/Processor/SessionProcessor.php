@@ -27,6 +27,10 @@ class SessionProcessor
         $this->session = $session;
     }
 
+    /**
+     * @param array<string, array<string, mixed>> $records
+     * @return array<string, array<string, mixed>>
+     */
     public function __invoke(array $records)
     {
         $records['extra']['session_id'] = 'N/A';

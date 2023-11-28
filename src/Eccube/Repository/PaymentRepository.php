@@ -36,7 +36,7 @@ class PaymentRepository extends AbstractRepository
     }
 
     /**
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function findAllArray()
     {
@@ -53,10 +53,10 @@ class PaymentRepository extends AbstractRepository
      * 支払方法を取得
      * 条件によってはDoctrineのキャッシュが返されるため、arrayで結果を返すパターンも用意
      *
-     * @param $delivery
-     * @param $returnType true : Object、false: arrayが戻り値
+     * @param \Eccube\Entity\Delivery $delivery
+     * @param boolean $returnType true : Object、false: arrayが戻り値
      *
-     * @return array
+     * @return array<int, \Eccube\Entity\Payment>
      */
     public function findPayments($delivery, $returnType = false)
     {
@@ -81,9 +81,9 @@ class PaymentRepository extends AbstractRepository
     /**
      * 共通の支払方法を取得
      *
-     * @param $deliveries
-     *
-     * @return array
+     * @param array<int, \Eccube\Entity\Delivery> $deliveries
+     * @param bool $returnType
+     * @return array<int, \Eccube\Entity\Payment>
      */
     public function findAllowedPayments($deliveries, $returnType = false)
     {

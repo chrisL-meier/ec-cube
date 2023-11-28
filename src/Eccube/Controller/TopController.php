@@ -21,6 +21,8 @@ class TopController extends AbstractController
     /**
      * @Route("/", name="homepage", methods={"GET"})
      * @Template("index.twig")
+     *
+     * @return array<empty>
      */
     public function index()
     {

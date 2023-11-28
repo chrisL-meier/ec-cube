@@ -27,6 +27,8 @@ class CssController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/content/css", name="admin_content_css", methods={"GET", "POST"})
      * @Template("@admin/Content/css.twig")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,\Symfony\Component\Form\FormView>
      */
     public function index(Request $request)
     {

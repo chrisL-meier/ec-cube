@@ -85,6 +85,13 @@ class ProductClassController extends AbstractController
      *
      * @Route("/%eccube_admin_route%/product/product/class/{id}", requirements={"id" = "\d+"}, name="admin_product_product_class", methods={"GET", "POST"})
      * @Template("@admin/Product/product_class.twig")
+     *
+     * @param Request $request
+     * @param string $id
+     * @param CacheUtil $cacheUtil
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException|\Doctrine\ORM\NonUniqueResultException
      */
     public function index(Request $request, $id, CacheUtil $cacheUtil)
     {
@@ -193,6 +200,13 @@ class ProductClassController extends AbstractController
      * 商品規格を初期化する.
      *
      * @Route("/%eccube_admin_route%/product/product/class/{id}/clear", requirements={"id" = "\d+"}, name="admin_product_product_class_clear", methods={"POST"})
+     *
+     * @param Request $request
+     * @param Product $Product
+     * @param CacheUtil $cacheUtil
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws ForeignKeyConstraintViolationException|\Exception
      */
     public function clearProductClasses(Request $request, Product $Product, CacheUtil $cacheUtil)
     {
@@ -285,8 +299,8 @@ class ProductClassController extends AbstractController
     /**
      * 商品規格の配列をマージする.
      *
-     * @param $ProductClassesForMatrix
-     * @param $ProductClasses
+     * @param array<int,ProductClass> $ProductClassesForMatrix
+     * @param \Doctrine\Common\Collections\ArrayCollection<int,ProductClass> $ProductClasses
      *
      * @return array|ProductClass[]
      */
@@ -322,6 +336,9 @@ class ProductClassController extends AbstractController
      *
      * @param Product $Product
      * @param array|ProductClass[] $ProductClasses
+     *
+     * @return void
+     * @throws NoResultException
      */
     protected function saveProductClasses(Product $Product, $ProductClasses = [])
     {
@@ -412,10 +429,10 @@ class ProductClassController extends AbstractController
     /**
      * 商品規格登録フォームを生成する.
      *
-     * @param array $ProductClasses
+     * @param array<int,ProductClass> $ProductClasses
      * @param ClassName|null $ClassName1
      * @param ClassName|null $ClassName2
-     * @param array $options
+     * @param array<string,mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
@@ -439,7 +456,7 @@ class ProductClassController extends AbstractController
      * 商品を取得する.
      * 商品規格はvisible=trueのものだけを取得し, 規格分類はsort_no=DESCでソートされている.
      *
-     * @param $id
+     * @param string|int $id
      *
      * @return Product|null
      *

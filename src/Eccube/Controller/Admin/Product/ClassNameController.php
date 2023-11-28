@@ -47,6 +47,12 @@ class ClassNameController extends AbstractController
      * @Route("/%eccube_admin_route%/product/class_name", name="admin_product_class_name", methods={"GET", "POST"})
      * @Route("/%eccube_admin_route%/product/class_name/{id}/edit", requirements={"id" = "\d+"}, name="admin_product_class_name_edit", methods={"GET", "POST"})
      * @Template("@admin/Product/class_name.twig")
+     *
+     * @param Request $request
+     * @param string|null $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @throws NotFoundHttpException
      */
     public function index(Request $request, $id = null)
     {
@@ -136,6 +142,12 @@ class ClassNameController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/class_name/{id}/delete", requirements={"id" = "\d+"}, name="admin_product_class_name_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param ClassName $ClassName
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function delete(Request $request, ClassName $ClassName)
     {
@@ -164,6 +176,11 @@ class ClassNameController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/product/class_name/sort_no/move", name="admin_product_class_name_sort_no_move", methods={"POST"})
+     *
+     * @param Request $request
+     *
+     * @return Response|void
+     * @throws BadRequestHttpException
      */
     public function moveSortNo(Request $request)
     {

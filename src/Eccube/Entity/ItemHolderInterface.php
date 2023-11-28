@@ -32,7 +32,9 @@ interface ItemHolderInterface
     /**
      * 合計金額を設定します。
      *
-     * @param $total|int
+     * @param int $total
+     *
+     * @return ItemHolderInterface
      */
     public function setTotal($total);
 
@@ -46,7 +48,9 @@ interface ItemHolderInterface
     /**
      * 送料合計を設定します。
      *
-     * @param $total|int
+     * @param int $total
+     *
+     * @return ItemHolderInterface
      */
     public function setDeliveryFeeTotal($total);
 
@@ -60,21 +64,27 @@ interface ItemHolderInterface
     /**
      * 値引き合計を設定します。
      *
-     * @param $total|int
+     * @param int $total
+     *
+     * @return ItemHolderInterface|void
      */
     public function setDiscount($total);
 
     /**
      * 手数料合計を設定します。
      *
-     * @param $total|int
+     * @param int $total
+     *
+     * @return ItemHolderInterface|void
      */
     public function setCharge($total);
 
     /**
      * 税額合計を設定します。
      *
-     * @param $total|int
+     * @param int $total
+     *
+     * @return ItemHolderInterface|void
      *
      * @deprecated 明細ごとに集計した税額と差異が発生する場合があるため非推奨
      */
@@ -83,7 +93,9 @@ interface ItemHolderInterface
     /**
      * 加算ポイントを設定します。
      *
-     * @param $addPoint|int
+     * @param int $addPoint
+     *
+     * @return ItemHolderInterface
      */
     public function setAddPoint($addPoint);
 
@@ -97,7 +109,9 @@ interface ItemHolderInterface
     /**
      * 利用ポイントを設定します。
      *
-     * @param $usePoint|int
+     * @param int $usePoint
+     *
+     * @return ItemHolderInterface
      */
     public function setUsePoint($usePoint);
 
@@ -110,6 +124,8 @@ interface ItemHolderInterface
 
     /**
      * @param ItemInterface $item
+     *
+     * @return void
      */
     public function addItem(ItemInterface $item);
     /**

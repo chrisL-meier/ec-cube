@@ -39,6 +39,7 @@ class PriceType extends AbstractType
      * PriceType constructor.
      *
      * @param EccubeConfig $eccubeConfig
+     * @param ContainerInterface $container
      */
     public function __construct(EccubeConfig $eccubeConfig, ContainerInterface $container)
     {
@@ -48,6 +49,10 @@ class PriceType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

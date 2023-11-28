@@ -28,18 +28,57 @@ if (!class_exists('\Eccube\Entity\Product')) {
      */
     class Product extends \Eccube\Entity\AbstractEntity
     {
+        /**
+         * @var bool
+         */
         private $_calc = false;
+        /**
+         * @var array<int,bool>
+         */
         private $stockFinds = [];
+        /**
+         * @var array<int,float|int|string>
+         */
         private $stocks = [];
+        /**
+         * @var array<int,bool>
+         */
         private $stockUnlimiteds = [];
+        /**
+         * @var array<int, int|null|float|string>
+         */
         private $price01 = [];
+        /**
+         * @var array<int, int|null|float|string>
+         */
         private $price02 = [];
+        /**
+         * @var array<int, int|null|float|string>
+         */
         private $price01IncTaxs = [];
+        /**
+         * @var array<int, int|null|float|string>
+         */
         private $price02IncTaxs = [];
+        /**
+         * @var array<int, string|null>
+         */
         private $codes = [];
+        /**
+         * @var array<string|int, string|null>
+         */
         private $classCategories1 = [];
+        /**
+         * @var array<string|int, string|null>
+         */
         private $classCategories2 = [];
+        /**
+         * @var string
+         */
         private $className1;
+        /**
+         * @var string
+         */
         private $className2;
 
         /**
@@ -50,6 +89,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             return (string) $this->getName();
         }
 
+        /**
+         * @return void
+         */
         public function _calc()
         {
             if (!$this->_calc) {
@@ -158,7 +200,7 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get getClassCategories1
          *
-         * @return array
+         * @return array<int, string|null>
          */
         public function getClassCategories1()
         {
@@ -167,6 +209,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             return $this->classCategories1;
         }
 
+        /**
+         * @return array<string,int>
+         */
         public function getClassCategories1AsFlip()
         {
             return array_flip($this->getClassCategories1());
@@ -175,7 +220,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get getClassCategories2
          *
-         * @return array
+         * @param string $class_category1
+         *
+         * @return array<int, string|null>
          */
         public function getClassCategories2($class_category1)
         {
@@ -184,6 +231,10 @@ if (!class_exists('\Eccube\Entity\Product')) {
             return isset($this->classCategories2[$class_category1]) ? $this->classCategories2[$class_category1] : [];
         }
 
+        /**
+         * @param string $class_category1
+         * @return array<string,int>
+         */
         public function getClassCategories2AsFlip($class_category1)
         {
             return array_flip($this->getClassCategories2($class_category1));
@@ -234,7 +285,7 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get StockUnlimited min
          *
-         * @return integer
+         * @return bool|null
          */
         public function getStockUnlimitedMin()
         {
@@ -248,7 +299,7 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get StockUnlimited max
          *
-         * @return integer
+         * @return bool|null
          */
         public function getStockUnlimitedMax()
         {
@@ -378,7 +429,7 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get Product_code min
          *
-         * @return integer
+         * @return string|null
          */
         public function getCodeMin()
         {
@@ -397,7 +448,7 @@ if (!class_exists('\Eccube\Entity\Product')) {
         /**
          * Get Product_code max
          *
-         * @return integer
+         * @return string|null
          */
         public function getCodeMax()
         {
@@ -413,6 +464,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             return count($codes) ? max($codes) : null;
         }
 
+        /**
+         * @return \Eccube\Entity\ProductImage|null
+         */
         public function getMainListImage()
         {
             $ProductImages = $this->getProductImage();
@@ -420,6 +474,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             return $ProductImages->isEmpty() ? null : $ProductImages[0];
         }
 
+        /**
+         * @return \Eccube\Entity\ProductImage|null
+         */
         public function getMainFileName()
         {
             if (count($this->ProductImage) > 0) {
@@ -429,6 +486,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             }
         }
 
+        /**
+         * @return bool
+         */
         public function hasProductClass()
         {
             foreach ($this->ProductClasses as $ProductClass) {
@@ -583,6 +643,9 @@ if (!class_exists('\Eccube\Entity\Product')) {
             $this->id = null;
         }
 
+        /**
+         * @return Product
+         */
         public function copy()
         {
             // コピー対象外

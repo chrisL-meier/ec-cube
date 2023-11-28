@@ -21,6 +21,10 @@ class ProductStatusType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -17,6 +17,7 @@ use Eccube\Entity\ItemHolderInterface;
 use Eccube\Entity\Order;
 use Eccube\Entity\Shipping;
 use Eccube\Repository\ProductClassRepository;
+use Eccube\Service\PurchaseFlow\InvalidItemException;
 use Eccube\Service\PurchaseFlow\ItemHolderValidator;
 use Eccube\Service\PurchaseFlow\PurchaseContext;
 
@@ -38,10 +39,11 @@ class StockMultipleValidator extends ItemHolderValidator
     }
 
     /**
-     * @param ItemHolderInterface $itemHolder
-     * @param PurchaseContext $context
+     * @param ItemHolderInterface $itemHolder 商品
+     * @param PurchaseContext $context 購入フローのコンテキスト
+     * @return void
      *
-     * @throws \Eccube\Service\PurchaseFlow\InvalidItemException
+     * @throws InvalidItemException
      */
     public function validate(ItemHolderInterface $itemHolder, PurchaseContext $context)
     {

@@ -86,7 +86,7 @@ class AdminController extends AbstractController
     protected $pluginApiService;
 
     /**
-     * @var array 売り上げ状況用受注状況
+     * @var array<int,int> 売り上げ状況用受注状況
      */
     private $excludes = [OrderStatus::CANCEL, OrderStatus::PENDING, OrderStatus::PROCESSING, OrderStatus::RETURNED];
 
@@ -128,6 +128,8 @@ class AdminController extends AbstractController
     /**
      * @Route("/%eccube_admin_route%/login", name="admin_login", methods={"GET", "POST"})
      * @Template("@admin/login.twig")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function login(Request $request)
     {
@@ -159,7 +161,7 @@ class AdminController extends AbstractController
      *
      * @param Request $request
      *
-     * @return array
+     * @return array<string,mixed>
      *
      * @throws NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -320,7 +322,7 @@ class AdminController extends AbstractController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function changePassword(Request $request)
     {
@@ -422,7 +424,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @param array $excludes
+     * @param array<int,int> $excludes
      *
      * @return array<int|string,mixed>|null
      */
@@ -588,9 +590,9 @@ class AdminController extends AbstractController
      *
      * @param Carbon $fromDate
      * @param Carbon $toDate
-     * @param $format
+     * @param string $format
      *
-     * @return array
+     * @return array<string,mixed>
      */
     protected function getData(Carbon $fromDate, Carbon $toDate, $format)
     {
@@ -611,12 +613,12 @@ class AdminController extends AbstractController
     /**
      * 期間毎にデータをまとめる
      *
-     * @param $result
+     * @param float|int|mixed|string $result
      * @param Carbon $fromDate
      * @param Carbon $toDate
-     * @param $format
+     * @param string $format
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function convert($result, Carbon $fromDate, Carbon $toDate, $format)
     {
